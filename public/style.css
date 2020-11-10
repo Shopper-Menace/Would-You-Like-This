@@ -19,3 +19,16 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 4rem;
+  align-items: center;
+  overflow: auto;
+  background-color: lightblue;
+}
+
+.auth {
+  display: flex;
+}
