@@ -1,16 +1,36 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
+const faker = require('faker')
+
+const generateUsers = async () => {
+  for (let i = 0; i < 50; i++) {
+    await User.create({
+      email: faker.internet.email(),
+      password: faker.internet.password()
+    })
+  }
+}
+
+const generateProducts = async () => {
+  for (let i = 0; i < 50; i++) {
+    await Product.create({
+      name: faker.commerce.productName(),
+      category: faker.commerce.department(),
+      price: faker.commerce.price(),
+      description: faker.commerce.description()
+    })
+  }
+}
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await Promise.all([generateUsers()])
+
+  const products = await Promise.all([generateProducts()])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
