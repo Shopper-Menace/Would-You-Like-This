@@ -18,14 +18,13 @@ const CartItem = require('./cartItem')
  * instead of: const User = require('../db/models/user')
  */
 
-
 Product.belongsTo(User, {
   constraints: true,
   onDelete: 'CASCADE'
 })
-User.hasMany(Product);
+User.hasMany(Product)
 User.hasOne(Cart)
-Cart.belongsToUser(User)
+Cart.belongsTo(User)
 
 Cart.belongsToMany(Product, {
   through: CartItem
@@ -35,8 +34,8 @@ Product.belongsToMany(Cart, {
   through: CartItem
 })
 
-Order.belongsTo(User);
-User.hasMany(Order);
+Order.belongsTo(User)
+User.hasMany(Order)
 
 Order.belongsToMany(Product, {
   through: OrderItem
@@ -45,7 +44,6 @@ Order.belongsToMany(Product, {
 Product.belongsToMany(Order, {
   through: OrderItem
 })
-
 
 module.exports = {
   User,
