@@ -1,7 +1,8 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Product} = require('../db/models')
 module.exports = router
 
+//FIND USERS ROUTE
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -12,6 +13,19 @@ router.get('/', async (req, res, next) => {
     })
     res.json(users)
   } catch (err) {
+    next(err)
+  }
+})
+
+//SINGLE USER ROUTE
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.userId, {
+      include: {model: Product, as: 'cart'}
+    })
+    res.json(singleUser)
+  } catch (err) {
+    console.error(err)
     next(err)
   }
 })
