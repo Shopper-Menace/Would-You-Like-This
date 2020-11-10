@@ -19,7 +19,8 @@ const generateProducts = async () => {
       name: faker.commerce.productName(),
       category: faker.commerce.department(),
       price: faker.commerce.price(),
-      description: faker.commerce.productDescription()
+      description: faker.commerce.productDescription(),
+      imageUrl: faker.image.abstract()
     })
   }
 }
