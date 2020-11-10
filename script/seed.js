@@ -19,7 +19,7 @@ const generateProducts = async () => {
       name: faker.commerce.productName(),
       category: faker.commerce.department(),
       price: faker.commerce.price(),
-      description: faker.commerce.description()
+      description: faker.commerce.productDescription()
     })
   }
 }
@@ -32,7 +32,8 @@ async function seed() {
 
   const products = await Promise.all([generateProducts()])
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded users`)
+  console.log(`seeded products`)
   console.log(`seeded successfully`)
 }
 
