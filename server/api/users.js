@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Product} = require('../db/models')
+const {User, Product, Cart} = require('../db/models')
 module.exports = router
 
 //FIND USERS ROUTE
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findByPk(req.params.userId, {
-      include: {model: Product, as: 'cart'}
+      include: {model: Cart}
     })
     res.json(singleUser)
   } catch (err) {
