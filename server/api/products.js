@@ -1,9 +1,11 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const {Product, User} = require('../db/models')
+const isLoggedIn = require('./middleware/isLoggedIn')
+const isAdminUser = require('./middleware/isAdminUser')
 module.exports = router
 
 //GET ALL PRODUCTS
-router.get('/', async (req, res, next) => {
+router.get('/', isAdminUser, async (req, res, next) => {
   try {
     const products = await Product.findAll()
     res.status(200).json(products)
@@ -52,6 +54,7 @@ router.put('/:productId', async (req, res, next) => {
 router.delete('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId)
+
     if (!product) return res.sendStatus(404)
     await product.destroy()
     res.sendStatus(204)
