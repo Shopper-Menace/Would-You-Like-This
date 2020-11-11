@@ -5,7 +5,7 @@ const isAdminUser = require('./middleware/isAdminUser')
 module.exports = router
 
 //GET ALL PRODUCTS
-router.get('/', isAdminUser, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
     res.status(200).json(products)
