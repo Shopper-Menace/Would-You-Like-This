@@ -35,7 +35,7 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
   //   </div>
   //   <hr />
   // </div>
-  <Navbar bg="primary" variant="dark">
+  <Navbar bg="50b2c0" variant="dark">
     <Navbar.Brand href="#home" />
     <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>

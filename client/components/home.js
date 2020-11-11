@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import RecentlyAdded from './recentlyAdded'
 import Recommended from './recommended'
-import Footer from './footer'
 
 class Home extends Component {
   render() {
