@@ -13,6 +13,17 @@ const OrderItem = db.define('orderItem', {
     validate: {
       min: 0
     }
+  },
+  fulfillmentStatus: {
+    type: Sequelize.ENUM('Cart', 'Pending', 'Complete'),
+    defaultValue: 'Cart'
+  },
+  currentPrice: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   }
 })
 
