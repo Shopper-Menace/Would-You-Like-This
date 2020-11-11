@@ -5,10 +5,10 @@ import UserCart from './userCart'
 
 const Cart = props => {
   return (
-    // <div className="cart">{!props.user ? <GuestCart /> : <UserCart />}</div>
-    <div>
-      <GuestCart />
-    </div>
+    <div className="cart">{!props.user ? <GuestCart /> : <UserCart />}</div>
+    // <div>
+    //   <GuestCart />
+    // </div>
   )
 }
 

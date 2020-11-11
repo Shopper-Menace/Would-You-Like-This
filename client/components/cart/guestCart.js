@@ -9,7 +9,6 @@ const GuestCart = () => {
   localStorage.setItem('cart', JSON.stringify(tempCart))
 
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
-  console.log(cart, 'CART')
 
   return !cart ? (
     <div>No Items</div>
