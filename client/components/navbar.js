@@ -11,7 +11,6 @@ import Button from 'react-bootstrap/Button'
 // import Cart from './cart'
 
 const NavbarComp = ({handleClick, isLoggedIn}) => (
-
   <div className="navbar">
     <h1>Would You Like This?</h1>
     <Link to="/home">Home</Link>
@@ -37,6 +36,9 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
             <Link to="/cart">
               <button>Your Cart</button>
             </Link>
+            <Link to="/products">
+              <button>View Products</button>
+            </Link>
           </div>
         )}
       </nav>
@@ -55,7 +57,6 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
   //   </Form>
   //   <Link to="/cart">Your Cart</Link>
   // </Navbar>
-
 )
 
 /**
