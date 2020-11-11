@@ -33,6 +33,25 @@ form div {
   display: flex;
 }
 
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cell {
+  margin: 20px;
+  outline: 2px solid black;
+}
+.productname {
+  white-space: nowrap;
+
 .navFont {
   color: #20131;
+
 }
