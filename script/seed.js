@@ -28,13 +28,16 @@ const generateProducts = async () => {
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
+  // Creates 50 random users
   const users = await Promise.all([generateUsers()])
+  // Creates Dummy Test user we can access
   const dummyUser = await User.create({
     email: 'Testsubject@gmail.com',
     password: '1234'
   })
+  // Creates 50 dummy items
   const products = await Promise.all([generateProducts()])
+  // Creates specific dummy item
   const newProduct = await Product.create({
     name: faker.commerce.productName(),
     category: faker.commerce.department(),
@@ -42,8 +45,15 @@ async function seed() {
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.abstract()
   })
+  // create test order in DB
   let testOrder = await dummyUser.createOrder(Order)
-
+  // Associate Dummy Product with Dummy order as an Order Item
+  await OrderItem.create({
+    orderId: testOrder.id,
+    productId: newProduct.id,
+    currentPrice: newProduct.price,
+    quantity: 1
+  })
   console.log(`seeded users`)
   console.log(`seeded products`)
   console.log(`seeded successfully`)
