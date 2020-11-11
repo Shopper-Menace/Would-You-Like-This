@@ -26,9 +26,32 @@ form div {
   padding: 1rem 4rem;
   align-items: center;
   overflow: auto;
-  background-color: lightblue;
+  background-color: #50b2c0;
 }
 
 .auth {
   display: flex;
+}
+
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cell {
+  margin: 20px;
+  outline: 2px solid black;
+}
+.productname {
+  white-space: nowrap;
+
+.navFont {
+  color: #20131;
+
 }

@@ -17,11 +17,14 @@ before_script:
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: would-you-like-this
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: osoYqSQwxRYfMJMe2K5TULrMN87dxUhsmWi4FIc9nqpQrkZJcSSLfGDQRHlEjzCy+p35DBLCxb356/8L4j1Xb/pC2XCs+hIUiF8JZK6Hl2xTI/G10zJ0a9TxIRTOc4sPGuXvulfHpr6TtUgnTd5GV7PpxaCJxX4iO+5ACrGgusU2R39R5tx3HInt/cTuQwRPPjYfdQY6Gc7SMVqYE8OV/6Ur0MhP8kp5Qu/O0DJzPsekZwjBujVh0mUbAGNJUpnJt7mmvnoRvX7RXKtgthQzFefUyZX4KiUaCHp+1D8mBME/XwifFjiEAaPFJ3iHrynzRvCxBs/PlpUsit6OjYNe/rwxHjWG+05x/82QuTbg0xpabxNVL9M/MyP4ac3Ayj15OgbLhRlQ8qy81U4WjVsFexSgtyV1wT56cObwsXkFs5y4w8seSbtv9eQjos09LILpcRC6iyewFKq/i+iQkoYwFgXDFIz/67AGHEEMlLnkKfBGU4S28hj4UCow+x3TvOQRe475AxZtGQcjHou7Sdvp2Ht2y94+kH8OXuRklpPMfxhubncxbaTWe9a3xZJAXIGRR+YJiODvjkC/34wSse7pGic/0Hgrpo08wSMA0Vim/uLjQuB5f9e9XVA5LGGnz8niWZlg3qzvnMskxVsUnhHkxQWgi4ErDs6jpNxlmVUw2Nc=
