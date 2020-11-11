@@ -26,9 +26,13 @@ form div {
   padding: 1rem 4rem;
   align-items: center;
   overflow: auto;
-  background-color: lightblue;
+  background-color: #50b2c0;
 }
 
 .auth {
   display: flex;
+}
+
+.navFont {
+  color: #20131;
 }
