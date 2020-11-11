@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+// import Cart from './cart'
 
 const NavbarComp = ({handleClick, isLoggedIn}) => (
   // <div className="navbar">
@@ -46,6 +47,7 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-light">Search</Button>
     </Form>
+    <Link to="/cart">Your Cart</Link>
   </Navbar>
 )
 
