@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 const UserCart = props => {
   return (
     <div>
+      USER CART
       {!props.cart ? (
         <div>No Items</div>
       ) : (
