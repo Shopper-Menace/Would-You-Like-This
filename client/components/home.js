@@ -4,7 +4,6 @@ import Recommended from './recommended'
 
 class Home extends Component {
   render() {
-    console.log('INSIDE HOME')
     return (
       <div className="home">
         <h1>Welcome!</h1>

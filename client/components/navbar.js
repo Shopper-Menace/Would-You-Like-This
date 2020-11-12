@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, fetchCart} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -10,7 +10,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 // import Cart from './cart'
 
-const NavbarComp = ({handleClick, isLoggedIn}) => (
+const NavbarComp = ({handleClick, isLoggedIn, user, handleCart}) => (
   <div className="navbar">
     <h1>Would You Like This?</h1>
     <Link to="/home">Home</Link>
@@ -21,7 +21,7 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
             {/* The navbar will show these links after you log in */}
             <button onClick={handleClick}>Logout</button>
             <Link to="/cart">
-              <button>Your Cart</button>
+              <button onClick={handleCart(user.id)}>Your Cart</button>
             </Link>
           </div>
         ) : (
@@ -64,7 +64,8 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
@@ -72,6 +73,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    handleCart(id) {
+      dispatch(fetchCart(id))
     }
   }
 }
