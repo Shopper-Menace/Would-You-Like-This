@@ -27,7 +27,7 @@ router.get('/:productId', async (req, res, next) => {
 })
 
 //ADD PRODUCT
-router.post('/', async (req, res, next) => {
+router.post('/', isAdminUser, async (req, res, next) => {
   try {
     const product = await Product.create(req.body)
     res.status(201).json(product)
@@ -38,7 +38,7 @@ router.post('/', async (req, res, next) => {
 })
 
 //UPDATE PRODUCT ROUTE
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', isAdminUser, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId)
     if (!product) return res.sendStatus(404)
@@ -51,7 +51,7 @@ router.put('/:productId', async (req, res, next) => {
 })
 
 //DELETE PRODUCT ROUTE
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', isAdminUser, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId)
 

@@ -1,5 +1,8 @@
 const router = require('express').Router()
+const isLoggedIn = require('./middleware/isLoggedIn')
+const isAdminUser = require('./middleware/isAdminUser')
 const {User, Product, Order} = require('../db/models')
+
 module.exports = router
 
 //FIND USERS ROUTE
