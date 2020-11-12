@@ -47,6 +47,8 @@ async function seed() {
   })
   // create test order in DB
   let testOrder = await dummyUser.createOrder(Order)
+
+
   // Associate Dummy Product with Dummy order as an Order Item
   // await OrderItem.create({
   //   orderId: testOrder.id,
@@ -61,7 +63,9 @@ async function seed() {
       quantity: 1
     }
   })
-
+  
+  // Associate Dummy Product with Dummy order as an Order Item
+  
   console.log(`seeded users`)
   console.log(`seeded products`)
   console.log(`seeded successfully`)

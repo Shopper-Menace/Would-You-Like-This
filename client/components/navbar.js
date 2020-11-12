@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 
 const NavbarComp = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
-    <h1>Would You Like This?</h1>
+    <img src="/favicon.ico" className="logo" />
     <Link to="/home">Home</Link>
     <div>
       <nav>
