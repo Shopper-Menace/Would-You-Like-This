@@ -48,32 +48,32 @@ const Footer = () => {
         <ul className="footerSocialList">
           <li>
             <a href="#">
-              <img src="fb-icon.png" className="facebook" />{' '}
+              <img src="/fb-icon.png" className="facebook" />{' '}
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="twitter-icon.png" className="twitter" />
+              <img src="/twitter-icon.png" className="twitter" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="insta-icon.png" className="instagram" />
+              <img src="/insta-icon.png" className="instagram" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="pinterest-icon.png" className="pinterest" />
+              <img src="/pinterest-icon.png" className="pinterest" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="linkedin-icon.png" className="linkedin" />
+              <img src="/linkedin-icon.png" className="linkedin" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="youtube-icon.png" className="youtube" />
+              <img src="/youtube-icon.png" className="youtube" />
             </a>
           </li>
         </ul>
