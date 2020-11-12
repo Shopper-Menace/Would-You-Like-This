@@ -33,7 +33,6 @@ form div {
   display: flex;
 }
 
-
 img {
   width: 100px;
   height: 100px;
@@ -50,8 +49,8 @@ img {
 }
 .productname {
   white-space: nowrap;
-
-.navFont {
+}
+/* .navFont {
   color: #20131;
 
-}
+} */
