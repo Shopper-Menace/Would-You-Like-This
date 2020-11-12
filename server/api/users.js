@@ -21,6 +21,8 @@ router.get('/', async (req, res, next) => {
 })
 
 //SINGLE USER ROUTE
+//this route may now be completely unnecessary, to view the user info when the user is logged, all of that data is already attatched to the user object
+
 router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findByPk(req.params.userId, {
