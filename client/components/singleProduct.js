@@ -27,9 +27,10 @@ export default class SingleProduct extends Component {
     }
 
     return (
-      <div>
-        <div />
-        <div>{this.state.product.name}</div>
+      <div className="singleprod">
+        <div className="prodname">
+          <h1>{this.state.product.name}</h1>
+        </div>
       </div>
     )
   }
