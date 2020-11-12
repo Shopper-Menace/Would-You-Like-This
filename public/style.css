@@ -35,22 +35,21 @@ form div {
   display: flex;
 }
 
-img {
+.prodimg {
   width: 100px;
   height: 100px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.viewallcontainer {
+  display: flex;
+  width: 100%;
 }
 
-.cell {
-  margin: 20px;
-  outline: 2px solid black;
-}
-.productname {
-  white-space: nowrap;
+.viewallsidebar {
+  display: block;
+  width: calc(0.25 * (100vw - 44px));
+  min-width: 247px;
+  max-width: 372px;
 }
 
 /* .navFont {
@@ -172,3 +171,6 @@ img {
   flex: 1;
 }
 
+.logo {
+  height: 10vh;
+}
