@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const {User, Product, Cart} = require('../db/models')
 const isLoggedIn = require('./middleware/isLoggedIn')
 const isAdminUser = require('./middleware/isAdminUser')
+const {User, Product, Order, OrderItem} = require('../db/models')
 
 module.exports = router
 
@@ -21,17 +21,37 @@ router.get('/', async (req, res, next) => {
 })
 
 //SINGLE USER ROUTE
-router.get('/:userId', async (req, res, next) => {
-  try {
-    const singleUser = await User.findByPk(req.params.userId, {
-      include: {model: Cart}
-    })
+//this route may now be completely unnecessary, to view the user info when the user is logged, all of that data is already attatched to the user object
 
-    //localStorage.setItem('cart', JSON.stringify(singleUser.cart))
+// router.get('/:userId', async (req, res, next) => {
+//   try {
+//     const singleUser = await User.findByPk(req.params.userId, {
+//       include: {
+//         model: Order,
+//         include: {
+//           model: Product
+//         }
+//         // where: {
+//         //   fulfillmentStatus: 'Cart',
+//         // },
+//       }
+//     })
 
-    res.json(singleUser)
-  } catch (err) {
-    console.error(err)
-    next(err)
-  }
-})
+//     // const orderItems = await OrderItem.findAll({
+//     //   where: {
+//     //     order
+//     //   }
+//     // })
+
+//     // const orderItems = await OrderItem.findAll({
+//     //   where: {
+//     //     orderId: singleUser.
+//     //   }
+//     // })
+
+//     res.json(singleUser)
+//   } catch (err) {
+//     console.error(err)
+//     next(err)
+//   }
+// })

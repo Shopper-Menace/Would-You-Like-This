@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, fetchCart} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 
 const NavbarComp = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
-    <h1>Would You Like This?</h1>
+    <img src="/favicon.ico" className="logo" />
     <Link to="/home">Home</Link>
     <div>
       <nav>
@@ -64,7 +64,8 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

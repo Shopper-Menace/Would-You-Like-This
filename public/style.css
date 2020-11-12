@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 a {
@@ -33,25 +35,142 @@ form div {
   display: flex;
 }
 
-
-img {
+.prodimg {
   width: 100px;
   height: 100px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.viewallcontainer {
+  display: flex;
+  width: 100%;
 }
 
-.cell {
-  margin: 20px;
-  outline: 2px solid black;
+.viewallsidebar {
+  display: block;
+  width: calc(0.25 * (100vw - 44px));
+  min-width: 247px;
+  max-width: 372px;
 }
-.productname {
-  white-space: nowrap;
 
-.navFont {
+/* .navFont {
   color: #20131;
+} */
 
+/* Footer */
+
+.container {
+  flex: 1;
+}
+
+.footer {
+  background-color: #faaa8d;
+  line-height: 1.5;
+  padding: 1.25rem 1.875rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*  width:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  */
+
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer input[type='email'] {
+  border: 0;
+  padding: 0.625rem;
+  margin-top: 0.3125rem;
+}
+
+.footer input[type='submit'] {
+  background-color: #50b2c0;
+  color: #feefdd;
+  cursor: pointer;
+  border: 0;
+  padding: 0.625rem 0.9375rem;
+  margin-top: 0.3125rem;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #201e1f;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: #feefdd;
+}
+
+.footer img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.footer img:hover {
+  filter: invert(1);
+}
+
+.footerTitle {
+  font-size: 1.375rem;
+  padding-bottom: 0.625rem;
+  font-weight: bold;
+}
+
+.footerColumn {
+  padding: 1.25rem;
+  min-width: 12.5rem;
+}
+
+.footerSocial {
+  padding: 0 1.875rem 1.25rem;
+  width: 100%;
+}
+
+.footerSocialList {
+  display: flex;
+  justify-content: center;
+  border-top: 1px #777 solid;
+  padding-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footerSocialList li {
+  margin: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.footerCopyright {
+  padding: 0.9375rem 1.875rem;
+  background-color: #201e1f;
+  color: #feefdd;
+  width: 100%;
+}
+
+.footerCopyrightList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footerCopyrightList li {
+  margin: 0.125rem 0.625rem;
+}
+
+/* one before the last child */
+.footerCopyrightList li:nth-last-child(2) {
+  flex: 1;
+}
+
+.logo {
+  height: 10vh;
 }

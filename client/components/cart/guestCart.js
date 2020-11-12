@@ -15,7 +15,7 @@ const GuestCart = () => {
   ) : (
     <div>
       GUEST CART
-      {cart.map(item => <div>{item}</div>)}
+      {cart.map(item => <div key={item[0]}>{item}</div>)}
     </div>
   )
 }

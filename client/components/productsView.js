@@ -22,19 +22,26 @@ class Products extends Component {
       this.getProducts()
     }
     return (
-      <div className="grid">
-        {this.state.products.map(product => {
-          return (
-            <div key={product.id} className="cell">
-              <Link to={`/products/${product.id}`}>
-                <h5 className="productname">{product.name}</h5>
-              </Link>
-              <img className="img" src={product.imageUrl} />
-              <div>{product.price}</div>
-              <div>{product.description}</div>
-            </div>
-          )
-        })}
+      
+      <div className="viewallcontainer">
+        <div className="viewallsidebar" />
+        <div className="productview">
+          {this.state.products.map(product => {
+            return (
+              <div key={product.id}>
+                <div>
+                  <img className="prodimg" src={product.imageUrl} />
+                </div>
+                <div>
+                    <Link to={`/products/${product.id}`}>
+                  <h5 className="productname">{product.name}</h5>
+                     </Link>
+                  <div>{`$${product.price / 100}`}</div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }

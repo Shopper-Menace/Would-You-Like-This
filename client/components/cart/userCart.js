@@ -14,10 +14,10 @@ const UserCart = props => {
   )
 }
 
-// const mapState = (state) => ({
-//   cart: state.user.cart,
-// })
+const mapState = state => ({
+  user: state.user
+})
 
-// export default connect(mapState, null)(UserCart)
+export default connect(mapState, null)(UserCart)
 
-export default UserCart
+// export default UserCart
