@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const {User, Product, Cart} = require('../db/models')
 const isLoggedIn = require('./middleware/isLoggedIn')
 const isAdminUser = require('./middleware/isAdminUser')
+const {User, Product, Order} = require('../db/models')
 
 module.exports = router
 
@@ -24,10 +24,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findByPk(req.params.userId, {
-      include: {model: Cart}
+      include: {model: Order}
     })
-
-    //localStorage.setItem('cart', JSON.stringify(singleUser.cart))
 
     res.json(singleUser)
   } catch (err) {
