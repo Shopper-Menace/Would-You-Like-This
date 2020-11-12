@@ -27,7 +27,6 @@ export const removeFromCart = (orderId, itemId) => async dispatch => {
   try {
     const res = await axios.put(`/api/users/${orderId}`, {itemId})
     dispatch(removeItem(res.data))
-    history.push('/home')
   } catch (err) {
     console.error(err)
   }
