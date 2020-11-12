@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {removeFromCart} from '../../store'
 
 const UserCart = ({order, removeFromCart}) => {
-  console.log(order, 'ORDER')
+  useEffect(
+    () => {
+      console.log(order, 'order')
+    },
+    [order]
+  )
+
   return (
     <div>
       USER CART
