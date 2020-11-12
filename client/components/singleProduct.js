@@ -15,7 +15,6 @@ export default class SingleProduct extends Component {
     this.setState({
       product: data
     })
-    console.log('DATA IN getSingleProduct: ', data)
   }
 
   // componentDidMount(){
@@ -23,6 +22,15 @@ export default class SingleProduct extends Component {
   // }
 
   render() {
-    if (this.state.product) return <h1>Waddup</h1>
+    if (Object.keys(this.state.product).length === 0) {
+      this.getSingleProduct(this.props.match.params.productId)
+    }
+
+    return (
+      <div>
+        <div />
+        <div>{this.state.product.name}</div>
+      </div>
+    )
   }
 }
