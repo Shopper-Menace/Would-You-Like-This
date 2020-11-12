@@ -25,18 +25,21 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findByPk(req.params.userId, {
       include: {
-        model: Order
-        // include: {
-        //   model: OrderItem,
-        //   include: {
-        //     model: Product,
-        //     where: {
-        //       productId: id,
-        //     },
-        //   },
+        model: Order,
+        include: {
+          model: Product
+        }
+        // where: {
+        //   fulfillmentStatus: 'Cart',
         // },
       }
     })
+
+    // const orderItems = await OrderItem.findAll({
+    //   where: {
+    //     order
+    //   }
+    // })
 
     // const orderItems = await OrderItem.findAll({
     //   where: {

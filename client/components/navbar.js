@@ -10,7 +10,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 // import Cart from './cart'
 
-const NavbarComp = ({handleClick, isLoggedIn, user, handleCart}) => (
+const NavbarComp = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
     <h1>Would You Like This?</h1>
     <Link to="/home">Home</Link>
@@ -21,7 +21,7 @@ const NavbarComp = ({handleClick, isLoggedIn, user, handleCart}) => (
             {/* The navbar will show these links after you log in */}
             <button onClick={handleClick}>Logout</button>
             <Link to="/cart">
-              <button onClick={handleCart(user.id)}>Your Cart</button>
+              <button>Your Cart</button>
             </Link>
           </div>
         ) : (
@@ -73,9 +73,6 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    },
-    handleCart(id) {
-      dispatch(fetchCart(id))
     }
   }
 }
