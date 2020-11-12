@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Products extends Component {
   constructor() {
@@ -25,7 +26,9 @@ class Products extends Component {
         {this.state.products.map(product => {
           return (
             <div key={product.id} className="cell">
-              <h5 className="productname">{product.name}</h5>
+              <Link to={`/products/${product.id}`}>
+                <h5 className="productname">{product.name}</h5>
+              </Link>
               <img className="img" src={product.imageUrl} />
               <div>{product.price}</div>
               <div>{product.description}</div>
