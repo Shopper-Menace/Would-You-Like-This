@@ -23,8 +23,6 @@ router.get('/:userId', async (req, res, next) => {
     const singleUser = await User.findByPk(req.params.userId, {
       include: {model: Order}
     })
-    console.log(singleUser, 'SINGLE USER')
-    //localStorage.setItem('cart', JSON.stringify(singleUser.cart))
 
     res.json(singleUser)
   } catch (err) {
