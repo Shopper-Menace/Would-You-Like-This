@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Products extends Component {
   constructor() {
@@ -21,6 +22,7 @@ class Products extends Component {
       this.getProducts()
     }
     return (
+      
       <div className="viewallcontainer">
         <div className="viewallsidebar" />
         <div className="productview">
@@ -31,7 +33,9 @@ class Products extends Component {
                   <img className="prodimg" src={product.imageUrl} />
                 </div>
                 <div>
+                    <Link to={`/products/${product.id}`}>
                   <h5 className="productname">{product.name}</h5>
+                     </Link>
                   <div>{`$${product.price / 100}`}</div>
                 </div>
               </div>
