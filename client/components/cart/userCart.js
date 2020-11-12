@@ -1,21 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const UserCart = props => {
+const UserCart = ({products}) => {
+  console.log(products)
   return (
     <div>
       USER CART
-      {!props.cart ? (
+      {!products.length ? (
         <div>No Items</div>
       ) : (
-        props.cart.map(item => <div>{item}</div>)
+        products.map(item => <div>{item.price}</div>)
       )}
     </div>
   )
 }
 
 const mapState = state => ({
-  user: state.user
+  products: state.user.orders.filter(
+    order => order.fulfillmentStatus === 'Cart'
+  )[0].products
 })
 
 export default connect(mapState, null)(UserCart)

@@ -4,14 +4,19 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_CART = 'GET_CART'
+const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
+const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
+const UPDATE_CART = 'UPDATE_CART'
 
-const getCart = cart => ({type: GET_CART, cart})
+const addItem = item => ({type: ADD_ITEM_TO_CART, item})
+const removeItem = item => ({type: REMOVE_ITEM_FROM_CART, item})
+const updateCart = cart => ({type: UPDATE_CART, cart})
 
-export const fetchCart = id => async dispatch => {
+export const addToCart = newItem => async dispatch => {
   try {
-    const res = await axios.get(`/api/users/${id}`)
-    dispatch(getCart(res.data))
+    const res = await axios.post('CREATE POST ROUTE')
+    dispatch(addItem(res.data))
+    history.push('/cart')
   } catch (err) {
     console.error(err)
   }
@@ -19,8 +24,10 @@ export const fetchCart = id => async dispatch => {
 
 export default function(state = {}, action) {
   switch (action.type) {
-    case GET_CART:
+    case ADD_ITEM_TO_CART:
       return {...state, cart: action.cart}
+    case REMOVE_ITEM_FROM_CART:
+      return {...state, cart}
     default:
       return state
   }

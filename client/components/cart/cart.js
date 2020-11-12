@@ -4,7 +4,6 @@ import GuestCart from './guestCart'
 import UserCart from './userCart'
 
 const Cart = props => {
-  console.log(props.user, 'USER OBJECT')
   return (
     <div className="cart">{!props.user.id ? <GuestCart /> : <UserCart />}</div>
     // <div>
