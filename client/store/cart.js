@@ -8,14 +8,29 @@ const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 const UPDATE_ITEM_IN_CART = 'UPDATE_ITEM_IN_CART'
 
-const addItem = newItem => ({type: ADD_ITEM_TO_CART, newItem})
-const removeItem = deletedItem => ({type: REMOVE_ITEM_FROM_CART, deletedItem})
-const updateItem = updatedItem => ({type: UPDATE_ITEM_IN_CART, updatedItem})
 
-export const addToCart = item => async dispatch => {
+//ACTION CREATORS
+const addItem = itemId => ({
+  type: ADD_ITEM_TO_CART,
+  itemId
+})
+
+
+const removeItem = itemId => ({
+  type: REMOVE_ITEM_FROM_CART,
+  itemId
+})
+
+const updateItem = itemId => ({
+  type: UPDATE_ITEM,
+  itemId
+})
+
+//THUNKS
+export const addToCart = itemId => async dispatch => {
   try {
-    const res = await axios.post('/api/users', item)
-    dispatch(addItem(res.data))
+    const {data: newItem} = await axios.post(`/api/products/${itemId}`)
+    dispatch(addItem(newItem))
     history.push('/cart')
   } catch (err) {
     console.error(err)
@@ -53,22 +68,22 @@ export default function(state = initialState, action) {
       return {...state, cart: [...state.cart, ...action.newItem]}
     case REMOVE_ITEM_FROM_CART:
       return {...state}
-    // return {
-    //   ...state,
-    //   cart: [
-    //     ...state.cart.filter((item) => item.id !== action.deletedItem.id),
-    //   ],
-    // }
-    // case UPDATE_ITEM_IN_CART:
-    //   return {
-    //     ...state,
-    //     cart: [
-    //       ...state.cart.map(item => {
-    //         item.id === action.updatedItem.id ? action.updatedItem : item
-    //       })
-    //     ]
-    //   }
     default:
       return state
   }
 }
+
+// case REMOVE_ITEM_FROM_CART:
+//   return {
+//     ...state,
+//     cart: [...state.cart.filter(item => item.id !== action.deletedItem.id)]
+//   }
+// case UPDATE_CART:
+//   return {
+//     ...state,
+//     cart: [
+//       ...state.cart.map(item => {
+//         item.id === action.updatedItem.id ? action.updatedItem : item
+//       })
+//     ]
+//   }
