@@ -75,6 +75,20 @@ form div {
   border-bottom: 2px solid black;
 }
 
+.singleprod {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.prodname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  outline: 2px solid black;
+}
+
 /* .navFont {
   color: #20131;
 } */

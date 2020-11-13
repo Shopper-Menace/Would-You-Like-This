@@ -42,6 +42,14 @@ const Product = db.define('product', {
   },
   rating: {
     type: Sequelize.INTEGER
+  },
+  featured: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  recommended: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
