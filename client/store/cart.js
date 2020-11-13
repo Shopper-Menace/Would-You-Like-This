@@ -9,40 +9,24 @@ const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 const UPDATE_ITEM_IN_CART = 'UPDATE_ITEM_IN_CART'
 
 
-//ACTION CREATORS
-const addItem = itemId => ({
-  type: ADD_ITEM_TO_CART,
-  itemId
-})
 
-
-const removeItem = itemId => ({
-  type: REMOVE_ITEM_FROM_CART,
-  itemId
-})
-
-const updateItem = itemId => ({
-  type: UPDATE_ITEM,
-  itemId
-})
-
-//THUNKS
-export const addToCart = itemId => async dispatch => {
+export const addToCart = (orderId, itemId) => async dispatch => {
   try {
-    const {data: newItem} = await axios.post(`/api/products/${itemId}`)
-    dispatch(addItem(newItem))
-    history.push('/cart')
+    console.log('INSIDE THUNK')
+    const res = await axios.post(`/api/users/addItem/${orderId}`, {itemId})
+    dispatch(addItem(res.data))
+    window.location.reload()
+    //history.push('/cart')
   } catch (err) {
     console.error(err)
   }
 }
 
 export const removeFromCart = (orderId, itemId) => async dispatch => {
-  console.log('INSIDE THUNK')
   try {
-    const res = await axios.put(`/api/users/${orderId}`, {itemId})
+    const res = await axios.put(`/api/users/removeItem/${orderId}`, {itemId})
     dispatch(removeItem(res.data))
-    history.push('/home')
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
@@ -65,7 +49,8 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_ITEM_TO_CART:
-      return {...state, cart: [...state.cart, ...action.newItem]}
+      // return {...state, cart: [...state.cart, ...action.newItem]}
+      return {...state}
     case REMOVE_ITEM_FROM_CART:
       return {...state}
     default:

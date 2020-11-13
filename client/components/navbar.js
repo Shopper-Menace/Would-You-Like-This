@@ -24,6 +24,9 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
             <Link to="/cart">
               <button>Your Cart</button>
             </Link>
+            <Link to="/products">
+              <button>View Products</button>
+            </Link>
           </div>
         ) : (
           <div>
