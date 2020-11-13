@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {addToCart} from '../store'
+import {connect} from 'react-redux'
 
-export default class SingleProduct extends Component {
+class SingleProduct extends Component {
   constructor() {
     super()
     this.state = {
@@ -34,3 +36,15 @@ export default class SingleProduct extends Component {
     )
   }
 }
+
+const mapState = state => ({
+  order: state.user.orders.filter(
+    order => order.fulfillmentStatus === 'Cart'
+  )[0]
+})
+
+const mapDispatch = dispatch => ({
+  addToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId))
+})
+
+export default connect(mapState, mapDispatch)(SingleProduct)

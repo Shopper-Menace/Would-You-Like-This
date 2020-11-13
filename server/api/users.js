@@ -21,17 +21,21 @@ router.get('/', async (req, res, next) => {
 })
 
 //ADD TO USER CART
-router.post('/', async (req, res, next) => {
+router.put('/addItem/:id', async (req, res, next) => {
   try {
-    const newItem = await OrderItem.create(req.body)
-    res.send(newItem)
+    const order = await Order.findByPk(req.params.id)
+    const item = await Product.findByPk(req.body.itemId)
+
+    await order.addProduct(item)
+
+    res.sendStatus(200)
   } catch (err) {
     console.error(err)
   }
 })
 
 //REMOVE FROM USER CART
-router.put('/:id', async (req, res, next) => {
+router.put('/removeItem/:id', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id)
     const item = await Product.findByPk(req.body.itemId)
