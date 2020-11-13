@@ -8,14 +8,27 @@ const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 const UPDATE_CART = 'UPDATE_CART'
 
-const addItem = item => ({type: ADD_ITEM_TO_CART, item})
-const removeItem = deletedItem => ({type: REMOVE_ITEM_FROM_CART, deletedItem})
-const updateItem = updatedItem => ({type: UPDATE_ITEM, updatedItem})
+//ACTION CREATORS
+const addItem = itemId => ({
+  type: ADD_ITEM_TO_CART,
+  itemId
+})
 
-export const addToCart = item => async dispatch => {
+const removeItem = itemId => ({
+  type: REMOVE_ITEM_FROM_CART,
+  itemId
+})
+
+const updateItem = itemId => ({
+  type: UPDATE_ITEM,
+  itemId
+})
+
+//THUNKS
+export const addToCart = itemId => async dispatch => {
   try {
-    const res = await axios.post('CREATE POST ROUTE')
-    dispatch(addItem(res.data))
+    const {data: newItem} = await axios.post(`/api/products/${itemId}`)
+    dispatch(addItem(newItem))
     history.push('/cart')
   } catch (err) {
     console.error(err)
@@ -46,23 +59,24 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case ADD_ITEM_TO_CART:
-    //   return {...state, cart: [...state.cart, ...action.cart]}
-    // case REMOVE_ITEM_FROM_CART:
-    //   return {
-    //     ...state,
-    //     cart: [...state.cart.filter(item => item.id !== action.deletedItem.id)]
-    //   }
-    // case UPDATE_CART:
-    //   return {
-    //     ...state,
-    //     cart: [
-    //       ...state.cart.map(item => {
-    //         item.id === action.updatedItem.id ? action.updatedItem : item
-    //       })
-    //     ]
-    //   }
+    case ADD_ITEM_TO_CART:
+      return {...state, cart: [...state.cart, ...action.newItem]}
     default:
       return state
   }
 }
+
+// case REMOVE_ITEM_FROM_CART:
+//   return {
+//     ...state,
+//     cart: [...state.cart.filter(item => item.id !== action.deletedItem.id)]
+//   }
+// case UPDATE_CART:
+//   return {
+//     ...state,
+//     cart: [
+//       ...state.cart.map(item => {
+//         item.id === action.updatedItem.id ? action.updatedItem : item
+//       })
+//     ]
+//   }

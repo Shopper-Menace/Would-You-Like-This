@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {NavbarComp, Footer} from './components'
 import Routes from './routes'
 
-const App = () => {
+const App = props => {
   return (
     <div>
       <NavbarComp />
