@@ -21,6 +21,9 @@ class Products extends Component {
     if (this.state.products.length === 0) {
       this.getProducts()
     }
+
+    console.log('USER', this.state)
+
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
@@ -40,6 +43,20 @@ class Products extends Component {
                     <h5 className="productname">{product.name}</h5>
                   </Link>
                   <div>{`$${product.price / 100}`}</div>
+                </div>
+                <div className="adminButtons">
+                  <button className="edit" type="button">
+                    Edit
+                  </button>
+                  <button className="delete" type="button">
+                    Delete
+                  </button>
+                  <button className="setFeatured" type="button">
+                    Set Featured
+                  </button>
+                  <button className="setRecommended" type="button">
+                    Set Recommended
+                  </button>
                 </div>
               </div>
             )

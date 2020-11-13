@@ -35,6 +35,12 @@ async function seed() {
     email: 'Testsubject@gmail.com',
     password: '1234'
   })
+  // Creates admin user we can access
+  const admin = await User.create({
+    email: 'admin@gmail.com',
+    password: 'admin',
+    isAdmin: true
+  })
   // Creates 50 dummy items
   const products = await Promise.all([generateProducts()])
   // Creates specific dummy item
@@ -47,7 +53,6 @@ async function seed() {
   })
   // create test order in DB
   let testOrder = await dummyUser.createOrder(Order)
-
 
   // Associate Dummy Product with Dummy order as an Order Item
   // await OrderItem.create({
@@ -63,9 +68,9 @@ async function seed() {
       quantity: 1
     }
   })
-  
+
   // Associate Dummy Product with Dummy order as an Order Item
-  
+
   console.log(`seeded users`)
   console.log(`seeded products`)
   console.log(`seeded successfully`)
