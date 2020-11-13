@@ -26,7 +26,9 @@ router.put('/addItem/:id', async (req, res, next) => {
     const order = await Order.findByPk(req.params.id)
     const item = await Product.findByPk(req.body.itemId)
 
-    await order.addProduct(item)
+    await order.addProduct(item, {
+      through: {currentPrice: item.price, quantity: 1}
+    })
 
     res.sendStatus(200)
   } catch (err) {

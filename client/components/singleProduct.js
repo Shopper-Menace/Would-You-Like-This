@@ -37,7 +37,10 @@ class SingleProduct extends Component {
   }
 }
 
+//to get product the product id would be in the route and individual product is gotten with filter using id
+
 const mapState = state => ({
+  product: state.product,
   order: state.user.orders.filter(
     order => order.fulfillmentStatus === 'Cart'
   )[0]
