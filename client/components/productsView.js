@@ -3,37 +3,21 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToCart} from '../store/cart'
+import {fetchAllProducts} from '../store'
 
 class Products extends Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     products: []
-  //   }
-  //   this.getProducts = this.getProducts.bind(this)
-  // }
-  // async getProducts() {
-  //   const prods = await axios.get('api/products')
-  //   this.setState({
-  //     products: prods.data
-  //   })
-  // }
+  componentDidMount() {
+    this.props.getProducts()
+  }
+
   render() {
-    // Makes it getProducts on load (temp fix till we add redux)
-
-    if (this.state.products.length === 0) {
-      this.getProducts()
-    }
-
-    console.log('USER', this.state)
-
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
         <div className="productview">
-          {this.state.products.map(product => {
+          {this.props.products.map(product => {
             return (
               <div key={product.id} className="prod">
                 <div className="prodbox">
@@ -77,12 +61,13 @@ class Products extends Component {
   }
 }
 
-const mapStateToProps = reduxState => ({
-  products: reduxState.products
+const mapStateToProps = state => ({
+  products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
-  addItemToCart: itemId => dispatch(addToCart(itemId))
+  addItemToCart: itemId => dispatch(addToCart(itemId)),
+  getProducts: () => dispatch(fetchAllProducts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
