@@ -20,10 +20,13 @@ class Products extends Component {
   // }
   render() {
     // Makes it getProducts on load (temp fix till we add redux)
-    // if (this.state.products.length === 0) {
-    //   this.getProducts()
-    // }
-    console.log('props in allproducts view: ', this.props)
+
+    if (this.state.products.length === 0) {
+      this.getProducts()
+    }
+
+    console.log('USER', this.state)
+
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
@@ -49,6 +52,20 @@ class Products extends Component {
                     }}
                   >
                     Add to Cart
+                  </button>
+                </div>
+                <div className="adminButtons">
+                  <button className="edit" type="button">
+                    Edit
+                  </button>
+                  <button className="delete" type="button">
+                    Delete
+                  </button>
+                  <button className="setFeatured" type="button">
+                    Set Featured
+                  </button>
+                  <button className="setRecommended" type="button">
+                    Set Recommended
                   </button>
                 </div>
               </div>
