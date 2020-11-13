@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchAllProducts} from '../store'
 import RecentlyAdded from './recentlyAdded'
 import Recommended from './recommended'
+import Featured from './featured'
 
 class Home extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class Home extends Component {
       <div className="home">
         <h1>Welcome!</h1>
         <RecentlyAdded />
+        <Featured />
         <Recommended />
       </div>
     )
