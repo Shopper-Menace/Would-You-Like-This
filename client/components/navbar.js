@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout, fetchCart} from '../store'
+import {fetchAllProducts} from '../store/products'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -68,7 +69,8 @@ const NavbarComp = ({handleClick, isLoggedIn}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    products: state.products
   }
 }
 
@@ -76,7 +78,8 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    getAllProducts: () => dispatch(fetchAllProducts())
   }
 }
 
