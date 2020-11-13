@@ -1,15 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {removeFromCart} from '../../store'
 
-const UserCart = ({products}) => {
-  console.log(products)
+const UserCart = ({order, removeFromCart}) => {
   return (
     <div>
       USER CART
-      {!products.length ? (
+      {!order.products.length ? (
         <div>No Items</div>
       ) : (
-        products.map(item => {
+        order.products.map(item => {
           const {category, description, id, imageUrl, name, price} = item
           return (
             <div key={id}>
@@ -19,7 +19,9 @@ const UserCart = ({products}) => {
               </h3>
               <img src={imageUrl} />
               <div>{description}</div>
-              <button>Remove {name} from cart</button>
+              <button onClick={() => removeFromCart(order.id, item.id)}>
+                Remove {name} from cart
+              </button>
             </div>
           )
         })
@@ -29,15 +31,13 @@ const UserCart = ({products}) => {
 }
 
 const mapState = state => ({
-  products: state.user.orders.filter(
+  order: state.user.orders.filter(
     order => order.fulfillmentStatus === 'Cart'
-  )[0].products
+  )[0]
 })
 
-// const mapDispatch = dispatch => ({
-//   removeFromCart: (id) => dispatch(removeFromCart(id))
-// })
+const mapDispatch = dispatch => ({
+  removeFromCart: (orderId, itemId) => dispatch(removeFromCart(orderId, itemId))
+})
 
-export default connect(mapState, null)(UserCart)
-
-// export default UserCart
+export default connect(mapState, mapDispatch)(UserCart)

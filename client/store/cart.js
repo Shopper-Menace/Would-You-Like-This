@@ -6,13 +6,15 @@ import history from '../history'
  */
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
-const UPDATE_CART = 'UPDATE_CART'
+const UPDATE_ITEM_IN_CART = 'UPDATE_ITEM_IN_CART'
+
 
 //ACTION CREATORS
 const addItem = itemId => ({
   type: ADD_ITEM_TO_CART,
   itemId
 })
+
 
 const removeItem = itemId => ({
   type: REMOVE_ITEM_FROM_CART,
@@ -35,11 +37,12 @@ export const addToCart = itemId => async dispatch => {
   }
 }
 
-export const removeFromCart = item => async dispatch => {
+export const removeFromCart = (orderId, itemId) => async dispatch => {
+  console.log('INSIDE THUNK')
   try {
-    const res = await axios.delete('CREATE DELETE ROUTE')
+    const res = await axios.put(`/api/users/${orderId}`, {itemId})
     dispatch(removeItem(res.data))
-    history.push('/cart')
+    history.push('/home')
   } catch (err) {
     console.error(err)
   }
@@ -47,7 +50,9 @@ export const removeFromCart = item => async dispatch => {
 
 export const updateInCart = item => async dispatch => {
   try {
-    const res = await axios.delete('CREATE UPDATE ROUTE')
+    const res = await axios.put(`/api/users/${item.id}`, item)
+    dispatch(updateItem(res.data))
+    history.push('/cart')
   } catch (err) {
     console.error(err)
   }
@@ -61,6 +66,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_ITEM_TO_CART:
       return {...state, cart: [...state.cart, ...action.newItem]}
+    case REMOVE_ITEM_FROM_CART:
+      return {...state}
     default:
       return state
   }

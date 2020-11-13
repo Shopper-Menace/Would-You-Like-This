@@ -26,15 +26,19 @@ class Products extends Component {
     console.log('props in allproducts view: ', this.props)
     return (
       <div className="viewallcontainer">
-        <div className="viewallsidebar" />
+        <div className="viewallsidebar">
+          <h1>WYLT Prime</h1>
+        </div>
         <div className="productview">
           {this.state.products.map(product => {
             return (
-              <div key={product.id}>
-                <div>
-                  <img className="prodimg" src={product.imageUrl} />
+              <div key={product.id} className="prod">
+                <div className="prodbox">
+                  <Link to={`/products/${product.id}`}>
+                    <img className="prodimg" src={product.imageUrl} />
+                  </Link>
                 </div>
-                <div>
+                <div className="prodtext">
                   <Link to={`/products/${product.id}`}>
                     <h5 className="productname">{product.name}</h5>
                   </Link>
