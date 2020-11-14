@@ -84,44 +84,20 @@ export default function(state = initialState, action) {
     case UPDATE_ITEM_IN_CART:
       return {...state}
     case ADD_TO_LOCAL_CART:
-      console.log('maybe?')
-      const previous = JSON.parse(localStorage.getItem('cart'))
-      // step 1 get current local cart
+      let previousForAdd = JSON.parse(localStorage.getItem('cart'))
       localStorage.clear()
-      // step 2 clear current local cart
-      console.log(previous, 'PREVIOUS')
-      const tempCart = [...previous, action.item]
-      // step 3 combine current local and new item into new array
-      localStorage.setItem('cart', JSON.stringify(tempCart))
-      // set cart in local storage as new array
+      let tempCartForAdd = [...previousForAdd, action.item]
+      localStorage.setItem('cart', JSON.stringify(tempCartForAdd))
       return {...state}
     case REMOVE_FROM_LOCAL_CART:
-      const previousForRemove = JSON.parse(localStorage.getItem('cart'))
-      //step 1 get previous cart
+      let previousForRemove = JSON.parse(localStorage.getItem('cart'))
       localStorage.clear()
-      //clear again
-      const tempCartForRemove = previousForRemove.filter(
+      let tempCartForRemove = previousForRemove.filter(
         item => item[0] !== action.item[0]
       )
       localStorage.setItem('cart', JSON.stringify(tempCartForRemove))
-      //set local cart as filtered previous
       return {...state}
     default:
       return state
   }
 }
-
-// case REMOVE_ITEM_FROM_CART:
-//   return {
-//     ...state,
-//     cart: [...state.cart.filter(item => item.id !== action.deletedItem.id)]
-//   }
-// case UPDATE_CART:
-//   return {
-//     ...state,
-//     cart: [
-//       ...state.cart.map(item => {
-//         item.id === action.updatedItem.id ? action.updatedItem : item
-//       })
-//     ]
-//   }

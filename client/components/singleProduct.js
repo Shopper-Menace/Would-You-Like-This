@@ -5,23 +5,6 @@ import {connect} from 'react-redux'
 const SingleProduct = ({product, user, addToCart, addToLocal}) => {
   const {category, description, id, imageUrl, name, price} = product
 
-  if (!user.id) {
-    let productAsArray = [id, category, name, price, description, imageUrl]
-    console.log('HERE')
-
-    return (
-      <div key={id}>
-        <h5>Category: {category}</h5>
-        <h3>
-          {name} Price: {price / 100}
-        </h3>
-        <img src={imageUrl} />
-        <div>{description}</div>
-        <button onClick={() => addToLocal(productAsArray)}>Add to cart</button>
-      </div>
-    )
-  }
-
   return (
     <div key={id}>
       <h5>Category: {category}</h5>
@@ -30,17 +13,32 @@ const SingleProduct = ({product, user, addToCart, addToLocal}) => {
       </h3>
       <img src={imageUrl} />
       <div>{description}</div>
-      <button
-        onClick={() =>
-          addToCart(
-            user.orders.filter(order => order.fulfillmentStatus === 'Cart')[0]
-              .id,
-            id
-          )
-        }
-      >
-        Add to cart
-      </button>
+      {!user.id ? (
+        <div>
+          <button
+            onClick={() =>
+              addToLocal([id, category, name, price, description, imageUrl])
+            }
+          >
+            Add to cart
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button
+            onClick={() =>
+              addToCart(
+                user.orders.filter(
+                  order => order.fulfillmentStatus === 'Cart'
+                )[0].id,
+                id
+              )
+            }
+          >
+            Add to cart
+          </button>
+        </div>
+      )}
     </div>
   )
 }
