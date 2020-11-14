@@ -15,8 +15,8 @@ const SingleProduct = ({product, user, addToCart}) => {
       <button
         onClick={() =>
           addToCart(
-            user.orders.filter(order => order.fulfillmentStatus === 'Cart')[0],
-            id,
+            user.orders.filter(order => order.fulfillmentStatus === 'Cart')[0]
+              .id,
             id
           )
         }
