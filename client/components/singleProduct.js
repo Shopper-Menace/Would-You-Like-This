@@ -40,7 +40,7 @@ import {connect} from 'react-redux'
 
 const SingleProduct = props => {
   console.log(props)
-  const {product, user, addToCart} = props
+  const {product, order, addToCart} = props
   const {category, description, id, imageUrl, name, price} = product
   return (
     <div key={id}>
@@ -50,7 +50,7 @@ const SingleProduct = props => {
       </h3>
       <img src={imageUrl} />
       <div>{description}</div>
-      <button onClick={() => addToCart(user.id, id)}>Add to cart</button>
+      <button onClick={() => addToCart(order.id, id)}>Add to cart</button>
     </div>
   )
 }
@@ -59,10 +59,9 @@ const SingleProduct = props => {
 
 const mapState = state => ({
   product: state.products.product,
-  user: state.user
-  // order: state.user.orders.filter(
-  //   (order) => order.fulfillmentStatus === 'Cart'
-  // )[0],
+  order: state.user.orders.filter(
+    order => order.fulfillmentStatus === 'Cart'
+  )[0]
 })
 
 const mapDispatch = dispatch => ({

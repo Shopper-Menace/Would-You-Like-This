@@ -28,13 +28,13 @@ const Products = props => {
                   <h5 className="productname">{product.name}</h5>
                 </Link>
                 <div>{`$${product.price / 100}`}</div>
-                <button
+                {/* <button
                   onClick={async () => {
                     await props.addItemToCart(product.id)
                   }}
                 >
                   Add to Cart
-                </button>
+                </button> */}
               </div>
               <div className="adminButtons">
                 <button className="edit" type="button">

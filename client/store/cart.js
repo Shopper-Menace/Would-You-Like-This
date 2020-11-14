@@ -17,8 +17,8 @@ export const addToCart = (orderId, itemId) => async dispatch => {
     console.log('INSIDE THUNK')
     const res = await axios.put(`/api/users/addItem/${orderId}`, {itemId})
     dispatch(addItem(res.data))
+    history.push('/cart')
     window.location.reload()
-    //history.push('/cart')
   } catch (err) {
     console.error(err)
   }

@@ -11,7 +11,6 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 // import Cart from './cart'
 
-
 const NavbarComp = ({handleClick, isLoggedIn}) => {
   return (
     <div className="navbar">
@@ -25,6 +24,9 @@ const NavbarComp = ({handleClick, isLoggedIn}) => {
               <button onClick={handleClick}>Logout</button>
               <Link to="/cart">
                 <button>Your Cart</button>
+              </Link>
+              <Link to="/products">
+                <button>View Products</button>
               </Link>
             </div>
           ) : (
@@ -46,7 +48,6 @@ const NavbarComp = ({handleClick, isLoggedIn}) => {
           )}
         </nav>
       </div>
-
     </div>
     // <Navbar bg="primary" variant="dark">
     //   <Navbar.Brand href="#home" />
