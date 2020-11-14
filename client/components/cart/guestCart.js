@@ -1,21 +1,24 @@
 import React, {useState} from 'react'
 
 const GuestCart = () => {
-  let tempCart = [
-    [1, 'no shoes'],
-    [2, 'no shirt'],
-    [3, 'and i still get service']
-  ]
-  localStorage.setItem('cart', JSON.stringify(tempCart))
-
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
 
-  return !cart ? (
+  return !cart.length ? (
     <div>No Items</div>
   ) : (
     <div>
       GUEST CART
-      {cart.map(item => <div key={item[0]}>{item}</div>)}
+      {cart.map(item => (
+        <div key={item[0]}>
+          <h5>Category: {item[1]}</h5>
+          <h3>
+            {item[2]} Price: {item[3]}
+          </h3>
+          <img src={item[5]} />
+          <div>{item[4]}</div>
+          <button> placeholder remove from local cart</button>
+        </div>
+      ))}
     </div>
   )
 }

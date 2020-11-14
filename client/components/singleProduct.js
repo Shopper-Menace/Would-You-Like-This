@@ -1,9 +1,27 @@
 import React from 'react'
-import {addToCart} from '../store'
+import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
 
-const SingleProduct = ({product, user, addToCart}) => {
+const SingleProduct = ({product, user, addToCart, addToLocal}) => {
   const {category, description, id, imageUrl, name, price} = product
+
+  if (!user.id) {
+    let productAsArray = [id, category, name, price, description, imageUrl]
+    console.log('HERE')
+
+    return (
+      <div key={id}>
+        <h5>Category: {category}</h5>
+        <h3>
+          {name} Price: {price / 100}
+        </h3>
+        <img src={imageUrl} />
+        <div>{description}</div>
+        <button onClick={() => addToLocal(productAsArray)}>Add to cart</button>
+      </div>
+    )
+  }
+
   return (
     <div key={id}>
       <h5>Category: {category}</h5>
@@ -35,7 +53,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  addToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId))
+  addToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
+  addToLocal: prodAsArr => dispatch(addToLocal(prodAsArr))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
