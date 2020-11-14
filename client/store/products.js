@@ -54,14 +54,17 @@ export const fetchSingleProduct = id => async dispatch => {
   }
 }
 
-const initialState = []
+const initialState = {
+  products: [],
+  product: {}
+}
 
 export default function products(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
-      return action.products
+      return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
-      return action.product
+      return {...state, product: action.product}
     default:
       return state
   }

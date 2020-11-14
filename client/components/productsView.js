@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {addToCart, fetchAllProducts, fetchSingleProduct} from '../store'
 
 const Products = props => {
+  console.log(props)
   return (
     <div className="viewallcontainer">
       <div className="viewallsidebar">
@@ -20,7 +21,10 @@ const Products = props => {
                 </Link>
               </div>
               <div className="prodtext">
-                <Link to={`/products/${product.id}`}>
+                <Link
+                  to={`/products/${product.id}`}
+                  onClick={() => props.handleClick(product.id)}
+                >
                   <h5 className="productname">{product.name}</h5>
                 </Link>
                 <div>{`$${product.price / 100}`}</div>
@@ -55,7 +59,7 @@ const Products = props => {
 }
 
 const mapStateToProps = state => ({
-  products: state.products
+  products: state.products.products
 })
 
 const mapDispatchToProps = dispatch => ({
