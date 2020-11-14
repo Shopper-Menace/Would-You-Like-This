@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {removeFromCart} from '../../store'
 
 const UserCart = ({order, removeFromCart}) => {
+  console.log(order)
   return (
     <div>
       USER CART

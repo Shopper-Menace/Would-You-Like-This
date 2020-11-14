@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addToCart, fetchAllProducts, fetchSingleProduct} from '../store'
+import {addToCart, fetchSingleProduct} from '../store'
 
 const Products = props => {
-  console.log(props)
+  console.log(props, 'PRODUCTS VIEW')
   return (
     <div className="viewallcontainer">
       <div className="viewallsidebar">

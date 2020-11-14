@@ -39,8 +39,20 @@ import {connect} from 'react-redux'
 // }
 
 const SingleProduct = props => {
-  console.log(props.product, 'SINGLE PRODUCT')
-  return <div>SINGLE PRODUCT</div>
+  console.log(props)
+  const {product, user, addToCart} = props
+  const {category, description, id, imageUrl, name, price} = product
+  return (
+    <div key={id}>
+      <h5>Category: {category}</h5>
+      <h3>
+        {name} Price: {price / 100}
+      </h3>
+      <img src={imageUrl} />
+      <div>{description}</div>
+      <button onClick={() => addToCart(user.id, id)}>Add to cart</button>
+    </div>
+  )
 }
 
 //to get product the product id would be in the route and individual product is gotten with filter using id
@@ -48,6 +60,9 @@ const SingleProduct = props => {
 const mapState = state => ({
   product: state.products.product,
   user: state.user
+  // order: state.user.orders.filter(
+  //   (order) => order.fulfillmentStatus === 'Cart'
+  // )[0],
 })
 
 const mapDispatch = dispatch => ({
