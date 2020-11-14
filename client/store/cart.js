@@ -46,15 +46,25 @@ export const updateInCart = item => async dispatch => {
 
 // local cart
 const ADD_TO_LOCAL_CART = 'ADD_TO_LOCAL_CART'
+const REMOVE_FROM_LOCAL_CART = 'REMOVE_FROM_LOCAL_CART'
 
 const addLocal = item => ({type: ADD_TO_LOCAL_CART, item})
+const removeLocal = item => ({type: REMOVE_FROM_LOCAL_CART, item})
 
 export const addToLocal = item => async dispatch => {
-  console.log('HELLO?')
   try {
     dispatch(addLocal(item))
     history.push('/cart')
     // window.location.reload()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const removeFromLocal = item => async dispatch => {
+  try {
+    dispatch(removeLocal(item))
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
@@ -84,6 +94,17 @@ export default function(state = initialState, action) {
       // step 3 combine current local and new item into new array
       localStorage.setItem('cart', JSON.stringify(tempCart))
       // set cart in local storage as new array
+      return {...state}
+    case REMOVE_FROM_LOCAL_CART:
+      const previousForRemove = JSON.parse(localStorage.getItem('cart'))
+      //step 1 get previous cart
+      localStorage.clear()
+      //clear again
+      const tempCartForRemove = previousForRemove.filter(
+        item => item[0] !== action.item[0]
+      )
+      localStorage.setItem('cart', JSON.stringify(tempCartForRemove))
+      //set local cart as filtered previous
       return {...state}
     default:
       return state

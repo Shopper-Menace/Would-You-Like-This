@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
+import {connect} from 'react-redux'
+import {removeFromLocal} from '../../store'
 
-const GuestCart = () => {
+const GuestCart = ({handleRemove}) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
 
   return !cart.length ? (
@@ -16,11 +18,15 @@ const GuestCart = () => {
           </h3>
           <img src={item[5]} />
           <div>{item[4]}</div>
-          <button> placeholder remove from local cart</button>
+          <button onClick={() => handleRemove(item)}> Remove from cart</button>
         </div>
       ))}
     </div>
   )
 }
 
-export default GuestCart
+const mapDispatch = dispatch => ({
+  handleRemove: item => dispatch(removeFromLocal(item))
+})
+
+export default connect(null, mapDispatch)(GuestCart)
