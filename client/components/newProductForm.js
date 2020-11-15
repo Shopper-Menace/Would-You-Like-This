@@ -13,7 +13,7 @@ export class NewProductForm extends React.Component {
       imageUrl: '',
       featured: false,
       recommended: false,
-      recentlyAdded: false
+      recentlyAdded: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -35,7 +35,7 @@ export class NewProductForm extends React.Component {
       imageUrl: '',
       featured: false,
       recommended: false,
-      recentlyAdded: false
+      recentlyAdded: true
     })
   }
 
@@ -56,8 +56,8 @@ export class NewProductForm extends React.Component {
             Product Description:
             <input
               onChange={this.handleChange}
-              value={this.state.address}
-              name="address"
+              value={this.state.description}
+              name="description"
               type="text"
             />
           </label>
@@ -65,18 +65,18 @@ export class NewProductForm extends React.Component {
             Product Category:
             <input
               onChange={this.handleChange}
-              value={this.state.description}
-              name="description"
+              value={this.state.category}
+              name="category"
               type="text"
             />
           </label>
           <label htmlFor="price">
-            Product Price:
+            Product Price, $:
             <input
               onChange={this.handleChange}
-              value={this.state.imageUrl}
-              name="imageUrl"
-              type="text"
+              value={this.state.price}
+              name="price"
+              type="number"
             />
           </label>
           <label htmlFor="imageUrl">
@@ -91,8 +91,8 @@ export class NewProductForm extends React.Component {
           <label htmlFor="featured">Featured?:</label>
           <select
             onChange={this.handleChange}
-            value={this.state.imageUrl}
-            name="imageUrl"
+            value={this.state.featured}
+            name="featured"
             type="text"
           >
             <option value="true">True</option>

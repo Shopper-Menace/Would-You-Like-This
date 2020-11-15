@@ -5,27 +5,61 @@ import {addToCart} from '../store/cart'
 import {me} from '../store/user'
 import {deleteProduct, updateExistingProduct} from '../store/products'
 //import EditProductForm from './editProductForm'
+import NewProductForm from './newProductForm'
 import {fetchAllProducts} from '../store'
 
 class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      showForm: false
+    }
+    this.toggleShow = this.toggleShow.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchAllProducts()
     this.props.loadUser()
+  }
+
+  toggleShow() {
+    this.state.showForm
+      ? this.setState({showForm: false})
+      : this.setState({showForm: true})
   }
 
   render() {
     //variable to check if current user is an Admin
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
-    console.log(this.props)
+
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
         {isAdmin && (
-          <div className="addProductButton">
-            <button type="button">Add New Product</button>
+          <div>
+            {this.state.showForm ? (
+              <div>
+                <button
+                  onClick={() => this.toggleShow()}
+                  className="delete"
+                  type="button"
+                >
+                  Hide Form
+                </button>
+                <NewProductForm />
+              </div>
+            ) : (
+              <button
+                onClick={() => this.toggleShow()}
+                className="add"
+                type="button"
+              >
+                Add Product
+              </button>
+            )}
           </div>
         )}
         <div className="productview">
