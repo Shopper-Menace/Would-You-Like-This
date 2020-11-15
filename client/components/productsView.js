@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToCart} from '../store/cart'
 import {me} from '../store/user'
-//import {deleteProduct, updateExistingProduct} from '../store/products'
+import {deleteProduct, updateExistingProduct} from '../store/products'
 //import EditProductForm from './editProductForm'
 import {fetchAllProducts} from '../store'
 
@@ -23,6 +23,11 @@ class Products extends React.Component {
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
+        {isAdmin && (
+          <div className="addProductButton">
+            <button type="button">Add New Product</button>
+          </div>
+        )}
         <div className="productview">
           {this.props.products.length > 0 ? (
             this.props.products.map(product => {
@@ -64,6 +69,7 @@ class Products extends React.Component {
                     {!this.props.user.id ? (
                       <div>
                         <button
+                          type="button"
                           onClick={() =>
                             addToLocal([
                               product.id,
@@ -81,6 +87,7 @@ class Products extends React.Component {
                     ) : (
                       <div>
                         <button
+                          type="button"
                           onClick={async () => {
                             await this.props.addItemToCart(
                               this.props.user.orders.filter(
@@ -115,8 +122,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addItemToCart: itemId => dispatch(addToCart(itemId)),
   loadUser: () => dispatch(me()),
-  fetchAllProducts: () => dispatch(fetchAllProducts())
-  //destroyProduct: productId => dispatch(deleteProduct(productId)),
+  fetchAllProducts: () => dispatch(fetchAllProducts()),
+  destroyProduct: productId => dispatch(deleteProduct(productId))
   //editProduct: productId => dispatch(updateExistingProduct(productId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
