@@ -5,26 +5,32 @@ const UPDATE_EXISTING_PRODUCT = 'UPDATE_EXISTING_PRODUCT'
 const ADD_NEW_PRODUCT = 'ADD_NEW_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const SET_PRODUCTS = 'SET_PRODUCTS'
+const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
 //ACTION CREATORS
-export const setProducts = products => ({
+const setProducts = products => ({
   type: SET_PRODUCTS,
   products
 })
 
-export const addNewProduct = newProduct => ({
+const addNewProduct = newProduct => ({
   type: ADD_NEW_PRODUCT,
   newProduct
 })
 
-export const updateExistingProduct = productId => ({
+const updateExistingProduct = productId => ({
   type: UPDATE_EXISTING_PRODUCT,
   productId
 })
 
-export const deleteProduct = productId => ({
+const deleteProduct = productId => ({
   type: DELETE_PRODUCT,
   productId
+})
+
+const getSingleProduct = product => ({
+  type: GET_SINGLE_PRODUCT,
+  product
 })
 
 //THUNKS
@@ -39,6 +45,7 @@ export const fetchAllProducts = () => {
     }
   }
 }
+
 
 //ADD NEW PRODUCT
 export const addProduct = product => {
@@ -64,7 +71,20 @@ export const updateProduct = product => {
   }
 }
 
-const initialState = []
+export const fetchSingleProduct = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/${id}`)
+    dispatch(getSingleProduct(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const initialState = {
+  products: [],
+  product: {}
+}
+
 
 export default function products(state = initialState, action) {
   switch (action.type) {
@@ -73,6 +93,8 @@ export default function products(state = initialState, action) {
     case ADD_NEW_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case UPDATE_EXISTING_PRODUCT:
+      return {...state, products: action.products}
+    case GET_SINGLE_PRODUCT:
       return {...state, product: action.product}
     default:
       return state

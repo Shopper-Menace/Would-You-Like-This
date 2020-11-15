@@ -3,13 +3,8 @@ import {connect} from 'react-redux'
 import GuestCart from './guestCart'
 import UserCart from './userCart'
 
-const Cart = props => {
-  return (
-    <div className="cart">{!props.user.id ? <GuestCart /> : <UserCart />}</div>
-    // <div>
-    //   <GuestCart />
-    // </div>
-  )
+const Cart = ({user}) => {
+  return <div className="cart">{!user.id ? <GuestCart /> : <UserCart />}</div>
 }
 
 const mapState = state => ({

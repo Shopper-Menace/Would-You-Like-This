@@ -50,6 +50,10 @@ const Product = db.define('product', {
   recommended: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  recentlyAdded: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
