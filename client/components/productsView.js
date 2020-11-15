@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToCart} from '../store/cart'
 import {me} from '../store/user'
-import {deleteProduct, updateExistingProduct} from '../store/products'
-//import EditProductForm from './editProductForm'
+import {deleteProduct} from '../store/products'
 import NewProductForm from './newProductForm'
 import {fetchAllProducts} from '../store'
 
@@ -44,7 +43,7 @@ class Products extends React.Component {
               <div>
                 <button
                   onClick={() => this.toggleShow()}
-                  className="delete"
+                  className="hide"
                   type="button"
                 >
                   Hide Form
@@ -84,9 +83,6 @@ class Products extends React.Component {
                         onClick={() => destroyProduct(product.id)}
                       >
                         Delete
-                      </button>
-                      <button className="setRecentlyAdded" type="button">
-                        Set as Recently Added
                       </button>
                       <button className="setAsFeatured" type="button">
                         Set as Featured
@@ -158,6 +154,5 @@ const mapDispatchToProps = dispatch => ({
   loadUser: () => dispatch(me()),
   fetchAllProducts: () => dispatch(fetchAllProducts()),
   destroyProduct: productId => dispatch(deleteProduct(productId))
-  //editProduct: productId => dispatch(updateExistingProduct(productId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

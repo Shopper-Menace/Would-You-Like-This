@@ -29,7 +29,9 @@ const Product = db.define('product', {
     }
   },
   imageUrl: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://hdv7r2idik-flywheel.netdna-ssl.com/wp-content/uploads/2018/12/product-image-placeholder-564x564.jpg'
   },
   stock: {
     type: Sequelize.INTEGER,

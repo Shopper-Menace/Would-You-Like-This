@@ -10,7 +10,7 @@ export class NewProductForm extends React.Component {
       description: '',
       category: '',
       price: '',
-      imageUrl: '',
+      imageUrl: undefined,
       featured: false,
       recommended: false,
       recentlyAdded: true
@@ -32,7 +32,7 @@ export class NewProductForm extends React.Component {
       description: '',
       category: '',
       price: '',
-      imageUrl: '',
+      imageUrl: undefined,
       featured: false,
       recommended: false,
       recentlyAdded: true

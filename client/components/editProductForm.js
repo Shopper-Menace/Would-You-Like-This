@@ -9,9 +9,9 @@ class EditProductForm extends React.Component {
       category: '',
       price: '',
       imageUrl: '',
-      featured: false,
-      recommended: false,
-      recentlyAdded: false
+      featured: '',
+      recommended: '',
+      recentlyAdded: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -50,9 +50,9 @@ class EditProductForm extends React.Component {
       category: '',
       price: '',
       imageUrl: '',
-      featured: false,
-      recommended: false,
-      recentlyAdded: false
+      featured: '',
+      recommended: '',
+      recentlyAdded: ''
     })
 
     this.props.loadSingleProduct(productId)
@@ -75,8 +75,8 @@ class EditProductForm extends React.Component {
             Edit Product Description:
             <input
               onChange={this.handleChange}
-              value={this.state.address}
-              name="address"
+              value={this.state.description}
+              name="description"
               type="text"
             />
           </label>
@@ -84,18 +84,18 @@ class EditProductForm extends React.Component {
             Edit Product Category:
             <input
               onChange={this.handleChange}
-              value={this.state.description}
-              name="description"
+              value={this.state.category}
+              name="category"
               type="text"
             />
           </label>
           <label htmlFor="price">
-            Edit Product Price:
+            Edit Product Price, $:
             <input
               onChange={this.handleChange}
-              value={this.state.imageUrl}
-              name="imageUrl"
-              type="text"
+              value={this.state.price}
+              name="price"
+              type="number"
             />
           </label>
           <label htmlFor="imageUrl">
@@ -110,8 +110,18 @@ class EditProductForm extends React.Component {
           <label htmlFor="featured">Featured?:</label>
           <select
             onChange={this.handleChange}
-            value={this.state.imageUrl}
-            name="imageUrl"
+            value={this.state.featured}
+            name="featured"
+            type="text"
+          >
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+          <label htmlFor="featured">Recently Added?:</label>
+          <select
+            onChange={this.handleChange}
+            value={this.state.recentlyAdded}
+            name="recentlyAdded"
             type="text"
           >
             <option value="true">True</option>
