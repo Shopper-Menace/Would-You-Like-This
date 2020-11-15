@@ -1,88 +1,93 @@
-import React, {Component} from 'react'
-import axios from 'axios'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addToCart} from '../store/cart'
+import {addToCart, fetchSingleProduct, addToLocal} from '../store'
 
-class Products extends Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     products: []
-  //   }
-  //   this.getProducts = this.getProducts.bind(this)
-  // }
-  // async getProducts() {
-  //   const prods = await axios.get('api/products')
-  //   this.setState({
-  //     products: prods.data
-  //   })
-  // }
-  render() {
-    // Makes it getProducts on load (temp fix till we add redux)
-
-    if (this.state.products.length === 0) {
-      this.getProducts()
-    }
-
-    console.log('USER', this.state)
-
-    return (
-      <div className="viewallcontainer">
-        <div className="viewallsidebar">
-          <h1>WYLT Prime</h1>
-        </div>
-        <div className="productview">
-          {this.state.products.map(product => {
-            return (
-              <div key={product.id} className="prod">
-                <div className="prodbox">
-                  <Link to={`/products/${product.id}`}>
-                    <img className="prodimg" src={product.imageUrl} />
-                  </Link>
-                </div>
-                <div className="prodtext">
-                  <Link to={`/products/${product.id}`}>
-                    <h5 className="productname">{product.name}</h5>
-                  </Link>
-                  <div>{`$${product.price / 100}`}</div>
-                  <button
-                    onClick={async () => {
-                      await this.props.addItemToCart(product.id)
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-                <div className="adminButtons">
-                  <button className="edit" type="button">
-                    Edit
-                  </button>
-                  <button className="delete" type="button">
-                    Delete
-                  </button>
-                  <button className="setFeatured" type="button">
-                    Set Featured
-                  </button>
-                  <button className="setRecommended" type="button">
-                    Set Recommended
-                  </button>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+const Products = ({products, user, handleClick, addToLocal}) => {
+  return (
+    <div className="viewallcontainer">
+      <div className="viewallsidebar">
+        <h1>WYLT Prime</h1>
       </div>
-    )
-  }
+      <div className="productview">
+        {products.map(product => {
+          const {id, imageUrl, name, price, description, category} = product
+          return (
+            <div key={id} className="prod">
+              <div className="prodbox">
+                <Link to={`/products/${id}`}>
+                  <img className="prodimg" src={imageUrl} />
+                </Link>
+              </div>
+              <div className="prodtext">
+                <Link to={`/products/${id}`} onClick={() => handleClick(id)}>
+                  <h5 className="productname">{name}</h5>
+                </Link>
+                <div>{`$${price / 100}`}</div>
+                {!user.id ? (
+                  <div>
+                    <button
+                      onClick={() =>
+                        addToLocal([
+                          id,
+                          category,
+                          name,
+                          price,
+                          description,
+                          imageUrl
+                        ])
+                      }
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      onClick={async () => {
+                        await addItemToCart(
+                          user.orders.filter(
+                            order => order.fulfillmentStatus === 'Cart'
+                          )[0].id,
+                          id
+                        )
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="adminButtons">
+                <button className="edit" type="button">
+                  Edit
+                </button>
+                <button className="delete" type="button">
+                  Delete
+                </button>
+                <button className="setFeatured" type="button">
+                  Set Featured
+                </button>
+                <button className="setRecommended" type="button">
+                  Set Recommended
+                </button>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
-const mapStateToProps = reduxState => ({
-  products: reduxState.products
+const mapStateToProps = state => ({
+  products: state.products.products,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  addItemToCart: itemId => dispatch(addToCart(itemId))
+  addItemToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
+  handleClick: id => dispatch(fetchSingleProduct(id)),
+  addToLocal: item => dispatch(addToLocal(item))
 })
-
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

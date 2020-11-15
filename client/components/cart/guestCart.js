@@ -1,23 +1,32 @@
 import React, {useState} from 'react'
+import {connect} from 'react-redux'
+import {removeFromLocal} from '../../store'
 
-const GuestCart = () => {
-  let tempCart = [
-    [1, 'no shoes'],
-    [2, 'no shirt'],
-    [3, 'and i still get service']
-  ]
-  localStorage.setItem('cart', JSON.stringify(tempCart))
-
+const GuestCart = ({handleRemove}) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
 
-  return !cart ? (
+  return !cart.length ? (
     <div>No Items</div>
   ) : (
     <div>
       GUEST CART
-      {cart.map(item => <div key={item[0]}>{item}</div>)}
+      {cart.map(item => (
+        <div key={item[0]}>
+          <h5>Category: {item[1]}</h5>
+          <h3>
+            {item[2]} Price: {item[3]}
+          </h3>
+          <img src={item[5]} />
+          <div>{item[4]}</div>
+          <button onClick={() => handleRemove(item)}> Remove from cart</button>
+        </div>
+      ))}
     </div>
   )
 }
 
-export default GuestCart
+const mapDispatch = dispatch => ({
+  handleRemove: item => dispatch(removeFromLocal(item))
+})
+
+export default connect(null, mapDispatch)(GuestCart)
