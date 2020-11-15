@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {fetchAllProducts} from '../store'
 import RecentlyAdded from './recentlyAdded'
 import Recommended from './recommended'
 import Featured from './featured'
+
 
 class Home extends Component {
   componentDidMount() {
@@ -23,14 +22,7 @@ class Home extends Component {
       </div>
     )
   }
+
 }
 
-const mapStateToProps = state => ({
-  products: state.products
-})
-
-const mapDispatchToProps = dispatch => ({
-  getProducts: () => dispatch(fetchAllProducts())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

@@ -6,7 +6,7 @@ import singleProduct from './components/singleProduct'
 
 import {Login, Signup, UserHome, Home, Products, Cart} from './components'
 
-import {me} from './store'
+import {me, fetchAllProducts} from './store'
 
 /**
  * COMPONENT
@@ -14,10 +14,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.fetchAllProducts()
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    // const {isLoggedIn} = this.props
 
     return (
       <Switch>
@@ -44,21 +45,14 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
-  return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
-  }
-}
+const mapState = state => ({
+  isLoggedIn: !!state.user.id
+})
 
-const mapDispatch = dispatch => {
-  return {
-    loadInitialData() {
-      dispatch(me())
-    }
-  }
-}
+const mapDispatch = dispatch => ({
+  loadInitialData: () => dispatch(me()),
+  fetchAllProducts: () => dispatch(fetchAllProducts())
+})
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
