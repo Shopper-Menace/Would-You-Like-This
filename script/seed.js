@@ -6,10 +6,11 @@ const faker = require('faker')
 
 const generateUsers = async () => {
   for (let i = 0; i < 50; i++) {
-    await User.create({
+    let currentUser = await User.create({
       email: faker.internet.email(),
       password: faker.internet.password()
     })
+    currentUser.createOrder(Order)
   }
 }
 
@@ -41,6 +42,8 @@ async function seed() {
     password: 'admin',
     isAdmin: true
   })
+
+  admin.createOrder(Order)
   // Creates 50 dummy items
   const products = await Promise.all([generateProducts()])
   // Creates specific dummy item

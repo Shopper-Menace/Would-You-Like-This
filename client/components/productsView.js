@@ -3,147 +3,120 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToCart} from '../store/cart'
 import {me} from '../store/user'
-import {deleteProduct, updateExistingProduct} from '../store/products'
-import EditProductForm from './editProductForm'
+//import {deleteProduct, updateExistingProduct} from '../store/products'
+//import EditProductForm from './editProductForm'
 import {fetchAllProducts} from '../store'
 
-class Products extends Component {
+class Products extends React.Component {
   componentDidMount() {
-    this.props.getProducts()
+    this.props.fetchAllProducts()
     this.props.loadUser()
   }
 
   render() {
-
     //variable to check if current user is an Admin
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
-
-  render() {
+    console.log(this.props)
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
         <div className="productview">
-          {this.props.products.map(product => {
-            return (
-              <div key={product.id} className="prod">
-                <div className="prodbox">
-                  <Link to={`/products/${product.id}`}>
-                    <img className="prodimg" src={product.imageUrl} />
-                  </Link>
-                </div>
-                <div className="prodtext">
-                  <Link to={`/products/${product.id}`}>
-                    <h5 className="productname">{product.name}</h5>
-                  </Link>
-                  <div>{`$${product.price / 100}`}</div>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      await this.props.addItemToCart(product.id)
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-                {isAdmin && (
-                  <div className="adminButtons">
-                    <button className="edit" type="button">
-                      Edit
-                    </button>
-                    <button
-                      className="delete"
-                      type="button"
-                      onClick={() => destroyProduct(product.id)}
-                    >
-                      Delete
-                    </button>
-                    <button className="setRecentlyAdded" type="button">
-                      Set as Recently Added
-                    </button>
-                    <button className="setAsFeatured" type="button">
-                      Set as Featured
-                    </button>
+          {this.props.products.length > 0 ? (
+            this.props.products.map(product => {
+              return (
+                <div key={product.id} className="prod">
+                  <div className="prodbox">
+                    <Link to={`/products/${product.id}`}>
+                      <img className="prodimg" src={product.imageUrl} />
+                    </Link>
                   </div>
-                )}
 
-              </div>
-              <div className="prodtext">
-                <Link to={`/products/${id}`} onClick={() => handleClick(id)}>
-                  <h5 className="productname">{name}</h5>
-                </Link>
-                <div>{`$${price / 100}`}</div>
-                {!user.id ? (
-                  <div>
-                    <button
-                      onClick={() =>
-                        addToLocal([
-                          id,
-                          category,
-                          name,
-                          price,
-                          description,
-                          imageUrl
-                        ])
-                      }
-                    >
-                      Add to Cart
-                    </button>
+                  {isAdmin && (
+                    <div className="adminButtons">
+                      <button className="edit" type="button">
+                        Edit
+                      </button>
+                      <button
+                        className="delete"
+                        type="button"
+                        onClick={() => destroyProduct(product.id)}
+                      >
+                        Delete
+                      </button>
+                      <button className="setRecentlyAdded" type="button">
+                        Set as Recently Added
+                      </button>
+                      <button className="setAsFeatured" type="button">
+                        Set as Featured
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="prodtext">
+                    <Link to={`/products/${product.id}`}>
+                      <h5 className="productname">{product.name}</h5>
+                    </Link>
+                    <div>{`$${product.price / 100}`}</div>
+
+                    {!this.props.user.id ? (
+                      <div>
+                        <button
+                          onClick={() =>
+                            addToLocal([
+                              product.id,
+                              product.category,
+                              product.name,
+                              product.price,
+                              product.description,
+                              product.imageUrl
+                            ])
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={async () => {
+                            await this.props.addItemToCart(
+                              this.props.user.orders.filter(
+                                order => order.fulfillmentStatus === 'Cart'
+                              )[0].id,
+                              id
+                            )
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div>
-                    <button
-                      onClick={async () => {
-                        await addItemToCart(
-                          user.orders.filter(
-                            order => order.fulfillmentStatus === 'Cart'
-                          )[0].id,
-                          id
-                        )
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div className="adminButtons">
-                <button className="edit" type="button">
-                  Edit
-                </button>
-                <button className="delete" type="button">
-                  Delete
-                </button>
-                <button className="setFeatured" type="button">
-                  Set Featured
-                </button>
-                <button className="setRecommended" type="button">
-                  Set Recommended
-                </button>
-              </div>
-            </div>
-          )
-        })}
+                </div>
+              )
+            })
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
-
 
 const mapStateToProps = state => ({
   products: state.products,
   user: state.user
-
 })
 
 const mapDispatchToProps = dispatch => ({
   addItemToCart: itemId => dispatch(addToCart(itemId)),
-  getProducts: () => dispatch(fetchAllProducts())
   loadUser: () => dispatch(me()),
-  destroyProduct: productId => dispatch(deleteProduct(productId)),
-  editProduct: productId => dispatch(updateExistingProduct(productId))
-
+  fetchAllProducts: () => dispatch(fetchAllProducts())
+  //destroyProduct: productId => dispatch(deleteProduct(productId)),
+  //editProduct: productId => dispatch(updateExistingProduct(productId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
