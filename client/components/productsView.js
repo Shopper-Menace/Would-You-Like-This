@@ -1,53 +1,32 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-
 import {addToCart} from '../store/cart'
 import {me} from '../store/user'
 import {deleteProduct, updateExistingProduct} from '../store/products'
 import EditProductForm from './editProductForm'
+import {fetchAllProducts} from '../store'
 
 class Products extends Component {
-  constructor() {
-    super()
-    this.state = {
-      products: []
-    }
-    this.getProducts = this.getProducts.bind(this)
-  }
-  async getProducts() {
-    const prods = await axios.get('api/products')
-    this.setState({
-      products: prods.data
-    })
-  }
-
   componentDidMount() {
-    try {
-      this.props.loadUser()
-    } catch (error) {
-      console.error(error)
-    }
+    this.props.getProducts()
+    this.props.loadUser()
   }
 
   render() {
-    // Makes it getProducts on load (temp fix till we add redux)
-
-    if (this.state.products.length === 0) {
-      this.getProducts()
-    }
 
     //variable to check if current user is an Admin
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
 
+  render() {
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
         <div className="productview">
-          {this.state.products.map(product => {
+          {this.props.products.map(product => {
             return (
               <div key={product.id} className="prod">
                 <div className="prodbox">
@@ -153,13 +132,15 @@ class Products extends Component {
 }
 
 
-const mapStateToProps = reduxState => ({
-  products: reduxState.products,
-  user: reduxState.user
+const mapStateToProps = state => ({
+  products: state.products,
+  user: state.user
+
 })
 
 const mapDispatchToProps = dispatch => ({
   addItemToCart: itemId => dispatch(addToCart(itemId)),
+  getProducts: () => dispatch(fetchAllProducts())
   loadUser: () => dispatch(me()),
   destroyProduct: productId => dispatch(deleteProduct(productId)),
   editProduct: productId => dispatch(updateExistingProduct(productId))

@@ -34,11 +34,37 @@ const getSingleProduct = product => ({
 })
 
 //THUNKS
+//Fetch all
 export const fetchAllProducts = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/products')
       dispatch(setProducts(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+
+//ADD NEW PRODUCT
+export const addProduct = product => {
+  return async dispatch => {
+    try {
+      const {data: newProduct} = await axios.post('/api/products', product)
+      dispatch(addNewProduct(newProduct))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+//EDIT PRODUCT
+export const updateProduct = product => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/products/${product.id}`)
+      dispatch(updateExistingProduct(data))
     } catch (err) {
       console.error(err)
     }
@@ -59,9 +85,14 @@ const initialState = {
   product: {}
 }
 
+
 export default function products(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
+      return action.products
+    case ADD_NEW_PRODUCT:
+      return {...state, products: [...state.products, action.product]}
+    case UPDATE_EXISTING_PRODUCT:
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, product: action.product}
