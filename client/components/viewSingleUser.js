@@ -29,7 +29,8 @@ class ViewSingleUser extends React.Component {
   }
 
   render() {
-    const user = this.props.user
+    const user = this.props.currentUser
+    console.log('view single user', this.props)
 
     return (
       <div id="single-user">
@@ -81,11 +82,11 @@ class ViewSingleUser extends React.Component {
 }
 
 const mapState = state => ({
-  user: state.singleUser
+  currentUser: state.currentUser
 })
 
 const mapDispatch = dispatch => ({
-  loadSingleUser: id => dispatch(fetchSingleUser(id)),
+  loadSingleUser: userId => dispatch(fetchSingleUser(userId)),
   destroyUser: userId => dispatch(deleteUser(userId)),
   updateThisUser: (userId, newInfo) => dispatch(updateUser(userId, newInfo))
 })

@@ -7,7 +7,7 @@ class ViewUsers extends React.Component {
   constructor() {
     super()
     this.state = {
-      showUsers: false
+      showUsers: true
     }
     this.toggleShow = this.toggleShow.bind(this)
   }
