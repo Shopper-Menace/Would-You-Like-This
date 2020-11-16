@@ -1,11 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addToCart} from '../store/cart'
-import {me} from '../store/user'
-import {deleteProduct} from '../store/products'
+import {
+  deleteProduct,
+  fetchAllProducts,
+  me,
+  addToCart,
+  addToLocal
+} from '../store'
 import NewProductForm from './newProductForm'
-import {fetchAllProducts} from '../store'
 
 class Products extends React.Component {
   constructor() {
@@ -29,9 +32,9 @@ class Products extends React.Component {
 
   render() {
     //variable to check if current user is an Admin
-    const isAdmin = this.props.user.isAdmin
-    const destroyProduct = this.props.destroyProduct
-    const addToCart = this.props.addItemToCart
+
+    const {user, destroyProduct, addToLocal, addItemToCart} = this.props
+    const {isAdmin} = user
 
     return (
       <div className="viewallcontainer">
@@ -122,7 +125,7 @@ class Products extends React.Component {
                         <button
                           type="button"
                           onClick={async () => {
-                            await addToCart(
+                            await addItemToCart(
                               this.props.user.orders.filter(
                                 order => order.fulfillmentStatus === 'Cart'
                               )[0].id,
@@ -153,9 +156,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addItemToCart: itemId => dispatch(addToCart(itemId)),
+  addItemToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
   loadUser: () => dispatch(me()),
   fetchAllProducts: () => dispatch(fetchAllProducts()),
-  destroyProduct: productId => dispatch(deleteProduct(productId))
+  destroyProduct: productId => dispatch(deleteProduct(productId)),
+  addToLocal: itemArr => dispatch(addToLocal(itemArr))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
