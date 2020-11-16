@@ -15,6 +15,36 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+//GET RECENT PRODUCTS
+router.get('/recentlyadded', async (req, res, next) => {
+  try {
+    const products = await Product.findAll({
+      where: {
+        recentlyAdded: true
+      }
+    })
+    res.status(200).json(products)
+  } catch (err) {
+    console.error(err)
+    next(err)
+  }
+})
+
+//GET RECENT PRODUCTS
+router.get('/featured', async (req, res, next) => {
+  try {
+    const products = await Product.findAll({
+      where: {
+        featured: true
+      }
+    })
+    res.status(200).json(products)
+  } catch (err) {
+    console.error(err)
+    next(err)
+  }
+})
+
 //GET SINGLE PRODUCT
 router.get('/:id', async (req, res, next) => {
   try {
