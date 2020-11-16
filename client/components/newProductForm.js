@@ -1,6 +1,8 @@
 import React from 'react'
+import {addProduct} from '../store/products'
+import {connect} from 'react-redux'
 
-class EditProductForm extends React.Component {
+export class NewProductForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -8,28 +10,13 @@ class EditProductForm extends React.Component {
       description: '',
       category: '',
       price: '',
-      imageUrl: '',
-      featured: '',
-      recommended: '',
-      recentlyAdded: ''
+      imageUrl: undefined,
+      featured: false,
+      recommended: false,
+      recentlyAdded: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount() {
-    const product = this.props.product
-
-    this.setState({
-      name: product.name,
-      description: product.description,
-      category: product.category,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      featured: product.featured,
-      recommended: product.recommended,
-      recentlyAdded: product.recentlyAdded
-    })
   }
 
   handleChange(event) {
@@ -37,25 +24,19 @@ class EditProductForm extends React.Component {
     this.setState({[name]: value})
   }
 
-  //Save this for new thunk:
   handleSubmit(event) {
     event.preventDefault()
-
-    const productId = this.props.product.id
-
-    this.props.updateThisProduct(productId, this.state)
+    this.props.addNewProduct(this.state)
     this.setState({
       name: '',
       description: '',
       category: '',
       price: '',
-      imageUrl: '',
-      featured: '',
-      recommended: '',
-      recentlyAdded: ''
+      imageUrl: undefined,
+      featured: false,
+      recommended: false,
+      recentlyAdded: true
     })
-
-    this.props.loadSingleProduct(productId)
   }
 
   render() {
@@ -63,7 +44,7 @@ class EditProductForm extends React.Component {
       <div>
         <form id="edit-product-form" onSubmit={this.handleSubmit}>
           <label htmlFor="name">
-            Edit Product Name:
+            Product Name:
             <input
               onChange={this.handleChange}
               value={this.state.name}
@@ -72,7 +53,7 @@ class EditProductForm extends React.Component {
             />
           </label>
           <label htmlFor="description">
-            Edit Product Description:
+            Product Description:
             <input
               onChange={this.handleChange}
               value={this.state.description}
@@ -81,7 +62,7 @@ class EditProductForm extends React.Component {
             />
           </label>
           <label htmlFor="category">
-            Edit Product Category:
+            Product Category:
             <input
               onChange={this.handleChange}
               value={this.state.category}
@@ -90,7 +71,7 @@ class EditProductForm extends React.Component {
             />
           </label>
           <label htmlFor="price">
-            Edit Product Price, $:
+            Product Price, $:
             <input
               onChange={this.handleChange}
               value={this.state.price}
@@ -99,7 +80,7 @@ class EditProductForm extends React.Component {
             />
           </label>
           <label htmlFor="imageUrl">
-            Edit Image Url:
+            Product Image Url:
             <input
               onChange={this.handleChange}
               value={this.state.imageUrl}
@@ -117,16 +98,6 @@ class EditProductForm extends React.Component {
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
-          <label htmlFor="featured">Recently Added?:</label>
-          <select
-            onChange={this.handleChange}
-            value={this.state.recentlyAdded}
-            name="recentlyAdded"
-            type="text"
-          >
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
           <button className="submit" type="submit" value="submit">
             Submit
           </button>
@@ -136,4 +107,8 @@ class EditProductForm extends React.Component {
   }
 }
 
-export default EditProductForm
+const mapDispatch = dispatch => ({
+  addNewProduct: product => dispatch(addProduct(product))
+})
+
+export default connect(null, mapDispatch)(NewProductForm)

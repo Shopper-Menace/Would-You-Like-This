@@ -3,26 +3,64 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addToCart} from '../store/cart'
 import {me} from '../store/user'
-//import {deleteProduct, updateExistingProduct} from '../store/products'
-//import EditProductForm from './editProductForm'
+import {deleteProduct} from '../store/products'
+import NewProductForm from './newProductForm'
 import {fetchAllProducts} from '../store'
 
 class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      showForm: false
+    }
+    this.toggleShow = this.toggleShow.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchAllProducts()
     this.props.loadUser()
+  }
+
+  toggleShow() {
+    this.state.showForm
+      ? this.setState({showForm: false})
+      : this.setState({showForm: true})
   }
 
   render() {
     //variable to check if current user is an Admin
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
-    console.log(this.props)
+
     return (
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
         </div>
+        {isAdmin && (
+          <div>
+            {this.state.showForm ? (
+              <div>
+                <button
+                  onClick={() => this.toggleShow()}
+                  className="hide"
+                  type="button"
+                >
+                  Hide Form
+                </button>
+                <NewProductForm />
+              </div>
+            ) : (
+              <button
+                onClick={() => this.toggleShow()}
+                className="add"
+                type="button"
+              >
+                Add Product
+              </button>
+            )}
+          </div>
+        )}
         <div className="productview">
           {this.props.products.length > 0 ? (
             this.props.products.map(product => {
@@ -46,9 +84,6 @@ class Products extends React.Component {
                       >
                         Delete
                       </button>
-                      <button className="setRecentlyAdded" type="button">
-                        Set as Recently Added
-                      </button>
                       <button className="setAsFeatured" type="button">
                         Set as Featured
                       </button>
@@ -64,6 +99,7 @@ class Products extends React.Component {
                     {!this.props.user.id ? (
                       <div>
                         <button
+                          type="button"
                           onClick={() =>
                             addToLocal([
                               product.id,
@@ -81,6 +117,7 @@ class Products extends React.Component {
                     ) : (
                       <div>
                         <button
+                          type="button"
                           onClick={async () => {
                             await this.props.addItemToCart(
                               this.props.user.orders.filter(
@@ -115,8 +152,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addItemToCart: itemId => dispatch(addToCart(itemId)),
   loadUser: () => dispatch(me()),
-  fetchAllProducts: () => dispatch(fetchAllProducts())
-  //destroyProduct: productId => dispatch(deleteProduct(productId)),
-  //editProduct: productId => dispatch(updateExistingProduct(productId))
+  fetchAllProducts: () => dispatch(fetchAllProducts()),
+  destroyProduct: productId => dispatch(deleteProduct(productId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
