@@ -1,8 +1,14 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
-import {fetchSingleProduct, updateProduct} from '../store/product'
-import {deleteProduct} from '../store/products'
+import {
+  addToCart,
+  addToLocal,
+  fetchSingleProduct,
+  updateProduct,
+  deleteProduct
+} from '../store'
 import EditProductForm from './editProductForm'
 
 class SingleProduct extends React.Component {
@@ -32,12 +38,23 @@ class SingleProduct extends React.Component {
   // const {category, description, id, imageUrl, name, price} = product
 
   render() {
+
     const product = this.props.product
     const user = this.props.user
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
     const {addItemToCart} = this.props
+    const {
+      product,
+      user,
+      isAdmin,
+      destroyProduct,
+      addToCart,
+      addToLocal
+    } = this.props
 
+    console.log(product)
+    
     return (
       <div className="singleProduct">
         {isAdmin && (
@@ -66,17 +83,15 @@ class SingleProduct extends React.Component {
                 Edit Product
               </button>
             )}
-
-            <button
-              className="delete"
-              type="button"
-              onClick={() => destroyProduct(product.id)}
-            >
-              Delete
-            </button>
-            <button className="setAsFeatured" type="button">
-              Set as Featured
-            </button>
+            <Link to="/products">
+              <button
+                className="delete"
+                type="button"
+                onClick={() => destroyProduct(product.id)}
+              >
+                Delete
+              </button>
+            </Link>
           </div>
         )}
 
@@ -85,6 +100,9 @@ class SingleProduct extends React.Component {
           <h3>
             {product.name} Price: ${product.price / 100}
           </h3>
+          {product.featured && (
+            <h4 className="isFeatured">*Featured Product*</h4>
+          )}
           <img src={product.imageUrl} />
           <div>{product.description}</div>
           {!user.id ? (
