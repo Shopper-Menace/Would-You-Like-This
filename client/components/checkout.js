@@ -6,7 +6,8 @@ const Checkout = ({order}) => {
 
   return (
     <div>
-      <h1>Hey, let's check out, bro!</h1>
+      <h3>You're about to be the proud owner of this cool stuff!</h3>
+      <p>We just need some shipping info so we can send it to you</p>
     </div>
   )
 }

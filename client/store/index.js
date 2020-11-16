@@ -12,7 +12,7 @@ import featured from './featured'
 
 const reducer = combineReducers({
   user,
-  users
+  users,
   cart,
   products,
   product,
@@ -33,4 +33,3 @@ export * from './product'
 export * from './users'
 export * from './recentlyadded'
 export * from './featured'
-

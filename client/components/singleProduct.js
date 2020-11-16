@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
 import {
   addToCart,
@@ -38,23 +37,17 @@ class SingleProduct extends React.Component {
   // const {category, description, id, imageUrl, name, price} = product
 
   render() {
-
-    const product = this.props.product
-    const user = this.props.user
-    const isAdmin = this.props.user.isAdmin
-    const destroyProduct = this.props.destroyProduct
-    const {addItemToCart} = this.props
     const {
       product,
+      addItemToCart,
       user,
       isAdmin,
       destroyProduct,
-      addToCart,
       addToLocal
     } = this.props
 
     console.log(product)
-    
+
     return (
       <div className="singleProduct">
         {isAdmin && (
