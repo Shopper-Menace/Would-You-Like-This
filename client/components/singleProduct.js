@@ -36,7 +36,7 @@ class SingleProduct extends React.Component {
     const user = this.props.user
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
-    const addToCart = this.props.addToCart
+    const {addItemToCart} = this.props
 
     return (
       <div className="singleProduct">
@@ -110,7 +110,7 @@ class SingleProduct extends React.Component {
               <button
                 type="button"
                 onClick={() =>
-                  addToCart(
+                  addItemToCart(
                     user.orders.filter(
                       order => order.fulfillmentStatus === 'Cart'
                     )[0].id,
@@ -140,7 +140,7 @@ const mapDispatch = dispatch => ({
   updateThisProduct: (productId, newInfo) =>
     dispatch(updateProduct(productId, newInfo)),
   destroyProduct: productId => dispatch(deleteProduct(productId)),
-  addToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
+  addItemToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
   addToLocal: prodAsArr => dispatch(addToLocal(prodAsArr))
 })
 
