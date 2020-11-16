@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addToCart} from '../store/cart'
+import {addToCart, addToLocal} from '../store/cart'
 import {Link} from 'react-router-dom'
-import {fetchRecentlyAdded, recentlyadded} from '../store/recentlyadded'
+import {fetchRecentlyAdded} from '../store/recentlyadded'
 import {me} from '../store/user'
 
 class RecentlyAdded extends React.Component {
@@ -13,8 +13,8 @@ class RecentlyAdded extends React.Component {
 
   render() {
     return (
-      <div className="recently-added">
-        <h2>Recently Added</h2>
+      <div className="productview">
+        <h1>Recently Added</h1>
         {this.props.recentlyadded.length > 0 ? (
           this.props.recentlyadded.map(product => {
             return (
@@ -29,6 +29,7 @@ class RecentlyAdded extends React.Component {
                   <Link to={`/products/${product.id}`}>
                     <h5 className="productname">{product.name}</h5>
                   </Link>
+
                   <div>{`$${product.price / 100}`}</div>
 
                   {!this.props.user.id ? (
@@ -36,7 +37,7 @@ class RecentlyAdded extends React.Component {
                       <button
                         type="button"
                         onClick={() =>
-                          addToLocal([
+                          this.props.addToLocal([
                             product.id,
                             product.category,
                             product.name,
@@ -46,7 +47,7 @@ class RecentlyAdded extends React.Component {
                           ])
                         }
                       >
-                        Add to Cart
+                        Add to Carts
                       </button>
                     </div>
                   ) : (
@@ -54,7 +55,7 @@ class RecentlyAdded extends React.Component {
                       <button
                         type="button"
                         onClick={async () => {
-                          await addToCart(
+                          await addItemToCart(
                             this.props.user.orders.filter(
                               order => order.fulfillmentStatus === 'Cart'
                             )[0].id,
@@ -85,7 +86,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addItemToCart: itemId => dispatch(addToCart(itemId)),
   loadUser: () => dispatch(me()),
-  fetchRecentlyAdded: () => dispatch(fetchRecentlyAdded())
+  fetchRecentlyAdded: () => dispatch(fetchRecentlyAdded()),
+  addToLocal: itemArr => dispatch(addToLocal(itemArr))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentlyAdded)

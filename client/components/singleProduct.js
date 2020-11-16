@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
 import {
   addToCart,
@@ -46,8 +45,6 @@ class SingleProduct extends React.Component {
       addToCart,
       addToLocal
     } = this.props
-
-    console.log(product)
 
     return (
       <div className="singleProduct">
