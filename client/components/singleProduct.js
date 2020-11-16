@@ -46,8 +46,6 @@ class SingleProduct extends React.Component {
       addToLocal
     } = this.props
 
-    console.log(product)
-
     return (
       <div className="singleProduct">
         {isAdmin && (
