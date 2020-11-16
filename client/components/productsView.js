@@ -31,6 +31,7 @@ class Products extends React.Component {
     //variable to check if current user is an Admin
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
+    const addToCart = this.props.addItemToCart
 
     return (
       <div className="viewallcontainer">
@@ -119,11 +120,11 @@ class Products extends React.Component {
                         <button
                           type="button"
                           onClick={async () => {
-                            await this.props.addItemToCart(
+                            await addToCart(
                               this.props.user.orders.filter(
                                 order => order.fulfillmentStatus === 'Cart'
                               )[0].id,
-                              id
+                              product.id
                             )
                           }}
                         >

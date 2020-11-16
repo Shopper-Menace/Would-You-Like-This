@@ -14,7 +14,6 @@ const updateItem = updatedItem => ({type: UPDATE_ITEM_IN_CART, updatedItem})
 
 export const addToCart = (orderId, itemId) => async dispatch => {
   try {
-    console.log('INSIDE THUNK')
     const res = await axios.put(`/api/users/addItem/${orderId}`, {itemId})
     dispatch(addItem(res.data))
     history.push('/cart')

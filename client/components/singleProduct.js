@@ -18,7 +18,6 @@ class SingleProduct extends React.Component {
     try {
       const productId = this.props.match.params.productId
       this.props.loadSingleProduct(productId)
-      console.log('props', this.props)
     } catch (error) {
       console.error(error)
     }
@@ -37,6 +36,7 @@ class SingleProduct extends React.Component {
     const user = this.props.user
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
+    const addToCart = this.props.addToCart
 
     return (
       <div className="singleProduct">
@@ -83,7 +83,7 @@ class SingleProduct extends React.Component {
         <div className="singleProductDiv">
           <h5>Category: {product.category}</h5>
           <h3>
-            {product.name} Price: {product.price / 100}
+            {product.name} Price: ${product.price / 100}
           </h3>
           <img src={product.imageUrl} />
           <div>{product.description}</div>
@@ -114,7 +114,7 @@ class SingleProduct extends React.Component {
                     user.orders.filter(
                       order => order.fulfillmentStatus === 'Cart'
                     )[0].id,
-                    id
+                    product.id
                   )
                 }
               >
@@ -131,12 +131,12 @@ class SingleProduct extends React.Component {
 //to get product the product id would be in the route and individual product is gotten with filter using id
 
 const mapState = state => ({
-  product: state.singleProduct,
+  product: state.product,
   user: state.user
 })
 
 const mapDispatch = dispatch => ({
-  loadSingleProduct: id => dispatch(fetchSingleProduct(id)),
+  loadSingleProduct: productId => dispatch(fetchSingleProduct(productId)),
   updateThisProduct: (productId, newInfo) =>
     dispatch(updateProduct(productId, newInfo)),
   destroyProduct: productId => dispatch(deleteProduct(productId)),
