@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers} from '../store/users'
+import {fetchUsers} from '../store'
+import {Link} from 'react-router-dom'
 
 class ViewUsers extends React.Component {
   constructor() {
     super()
     this.state = {
-      showForm: false
+      showUsers: false
     }
     this.toggleShow = this.toggleShow.bind(this)
   }
@@ -16,17 +17,62 @@ class ViewUsers extends React.Component {
   }
 
   toggleShow() {
-    this.state.showForm
-      ? this.setState({showForm: false})
-      : this.setState({showForm: true})
+    this.state.showUsers
+      ? this.setState({showUsers: false})
+      : this.setState({showUsers: true})
   }
 
   render() {
-    console.log('view all users props', this.props)
+    const users = this.props.users
+    const isAdmin = this.props.user.isAdmin
 
     return (
       <div id="all-users">
-        <h1>VIEW ALL USERS</h1>
+        {isAdmin && (
+          <div id="all-users-list">
+            {this.state.showUsers ? (
+              <div id="list-loaded">
+                <button
+                  className="hide"
+                  type="submit"
+                  value="hide"
+                  onClick={() => this.toggleShow()}
+                >
+                  Hide All Users
+                </button>
+                <table>
+                  <tbody>
+                    <tr>
+                      <th>User ID</th>
+                      <th>Email Address</th>
+                      <th>Profile</th>
+                    </tr>
+                    {users.map(user => (
+                      <tr key={user.id}>
+                        <td>{user.id}</td>
+                        <td>{user.email}</td>
+                        <Link to={`/users-admin/${user.id}`}>
+                          <td>View Profile</td>
+                        </Link>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div id="list-not-loaded">
+                <button
+                  className="show"
+                  type="submit"
+                  value="show"
+                  onClick={() => this.toggleShow()}
+                >
+                  Show All Users
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     )
   }
