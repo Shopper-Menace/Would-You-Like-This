@@ -1,8 +1,12 @@
 import React from 'react'
-import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
-import {fetchSingleProduct, updateProduct} from '../store/product'
-import {deleteProduct} from '../store/products'
+import {
+  addToCart,
+  addToLocal,
+  fetchSingleProduct,
+  updateProduct,
+  deleteProduct
+} from '../store'
 import EditProductForm from './editProductForm'
 
 class SingleProduct extends React.Component {
@@ -32,11 +36,16 @@ class SingleProduct extends React.Component {
   // const {category, description, id, imageUrl, name, price} = product
 
   render() {
-    const product = this.props.product
-    const user = this.props.user
-    const isAdmin = this.props.user.isAdmin
-    const destroyProduct = this.props.destroyProduct
-    const addToCart = this.props.addToCart
+    const {
+      product,
+      user,
+      isAdmin,
+      destroyProduct,
+      addToCart,
+      addToLocal
+    } = this.props
+
+    console.log(product)
 
     return (
       <div className="singleProduct">
