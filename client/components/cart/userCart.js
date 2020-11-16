@@ -4,8 +4,6 @@ import {removeFromCart} from '../../store'
 import {Link} from 'react-router-dom'
 
 const UserCart = ({order, removeFromCart}) => {
-  console.log('order in userCart view', order)
-  // console.log(this.state.user.order)
   let cartTotal = 0
   return (
     <div>
@@ -32,7 +30,7 @@ const UserCart = ({order, removeFromCart}) => {
         })
       )}
       <h5>Your total is: ${cartTotal / 100}</h5>
-      <Link to="/cart/checkout">
+      <Link to={{pathname: '/cart/checkout', props: {order}}}>
         <button>Go to Checkout</button>
       </Link>
     </div>

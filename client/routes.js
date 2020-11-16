@@ -12,7 +12,8 @@ import {
   Products,
   Cart,
   Checkout,
-  ViewSingleUser
+  ViewSingleUser,
+  Confirmation
 } from './components'
 
 import {me, fetchAllProducts} from './store'
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/cart/checkout" component={Checkout} />
+        <Route exact path="/cart/confirmation" component={Confirmation} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/:productId" component={singleProduct} />
