@@ -38,6 +38,12 @@ class SingleProduct extends React.Component {
   // const {category, description, id, imageUrl, name, price} = product
 
   render() {
+
+    const product = this.props.product
+    const user = this.props.user
+    const isAdmin = this.props.user.isAdmin
+    const destroyProduct = this.props.destroyProduct
+    const {addItemToCart} = this.props
     const {
       product,
       user,
@@ -48,7 +54,7 @@ class SingleProduct extends React.Component {
     } = this.props
 
     console.log(product)
-
+    
     return (
       <div className="singleProduct">
         {isAdmin && (
@@ -122,7 +128,7 @@ class SingleProduct extends React.Component {
               <button
                 type="button"
                 onClick={() =>
-                  addToCart(
+                  addItemToCart(
                     user.orders.filter(
                       order => order.fulfillmentStatus === 'Cart'
                     )[0].id,
@@ -152,7 +158,7 @@ const mapDispatch = dispatch => ({
   updateThisProduct: (productId, newInfo) =>
     dispatch(updateProduct(productId, newInfo)),
   destroyProduct: productId => dispatch(deleteProduct(productId)),
-  addToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
+  addItemToCart: (orderId, itemId) => dispatch(addToCart(orderId, itemId)),
   addToLocal: prodAsArr => dispatch(addToLocal(prodAsArr))
 })
 
