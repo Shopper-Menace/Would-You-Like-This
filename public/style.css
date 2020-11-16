@@ -89,6 +89,18 @@ form div {
   outline: 2px solid black;
 }
 
+.homeprod {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  align-content: center;
+}
+
+.homecell {
+  margin: 10px;
+  outline: 5px solid black;
+}
+
 /* .navFont {
   color: #20131;
 } */

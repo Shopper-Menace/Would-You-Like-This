@@ -15,65 +15,67 @@ class RecentlyAdded extends React.Component {
     return (
       <div className="productview">
         <h1>Recently Added</h1>
-        {this.props.recentlyadded.length > 0 ? (
-          this.props.recentlyadded.map(product => {
-            return (
-              <div key={product.id} className="prod">
-                <div className="prodbox">
-                  <Link to={`/products/${product.id}`}>
-                    <img className="prodimg" src={product.imageUrl} />
-                  </Link>
+        <div className="homeprod">
+          {this.props.recentlyadded.length > 0 ? (
+            this.props.recentlyadded.map(product => {
+              return (
+                <div key={product.id} className="homecell">
+                  <div>
+                    <Link to={`/products/${product.id}`}>
+                      <img className="prodimg" src={product.imageUrl} />
+                    </Link>
+                  </div>
+
+                  <div className="prodtext">
+                    <Link to={`/products/${product.id}`}>
+                      <h5 className="productname">{product.name}</h5>
+                    </Link>
+
+                    <div>{`$${product.price / 100}`}</div>
+
+                    {!this.props.user.id ? (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            this.props.addToLocal([
+                              product.id,
+                              product.category,
+                              product.name,
+                              product.price,
+                              product.description,
+                              product.imageUrl
+                            ])
+                          }
+                        >
+                          Add to Carts
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            await addItemToCart(
+                              this.props.user.orders.filter(
+                                order => order.fulfillmentStatus === 'Cart'
+                              )[0].id,
+                              product.id
+                            )
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-
-                <div className="prodtext">
-                  <Link to={`/products/${product.id}`}>
-                    <h5 className="productname">{product.name}</h5>
-                  </Link>
-
-                  <div>{`$${product.price / 100}`}</div>
-
-                  {!this.props.user.id ? (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          this.props.addToLocal([
-                            product.id,
-                            product.category,
-                            product.name,
-                            product.price,
-                            product.description,
-                            product.imageUrl
-                          ])
-                        }
-                      >
-                        Add to Carts
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          await addItemToCart(
-                            this.props.user.orders.filter(
-                              order => order.fulfillmentStatus === 'Cart'
-                            )[0].id,
-                            product.id
-                          )
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )
-          })
-        ) : (
-          <div />
-        )}
+              )
+            })
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     )
   }
