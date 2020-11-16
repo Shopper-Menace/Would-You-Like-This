@@ -63,8 +63,6 @@ router.get('/me', async (req, res) => {
     }
   })
 
-  console.log(user, 'USER')
-
   res.json(user)
 })
 

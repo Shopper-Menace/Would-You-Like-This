@@ -1,8 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {removeFromCart} from '../../store'
+import {Link} from 'react-router-dom'
 
 const UserCart = ({order, removeFromCart}) => {
+  let cartTotal = 0
   return (
     <div>
       USER CART
@@ -11,11 +13,12 @@ const UserCart = ({order, removeFromCart}) => {
       ) : (
         order.products.map(item => {
           const {category, description, id, imageUrl, name, price} = item
+          cartTotal += price
           return (
             <div key={id}>
               <h5>Category: {category}</h5>
               <h3>
-                {name} Price: {price}
+                {name} Price: ${price / 100}
               </h3>
               <img src={imageUrl} />
               <div>{description}</div>
@@ -26,6 +29,10 @@ const UserCart = ({order, removeFromCart}) => {
           )
         })
       )}
+      <h5>Your total is: ${cartTotal / 100}</h5>
+      <Link to="/checkout">
+        <button>Go to Checkout</button>
+      </Link>
     </div>
   )
 }

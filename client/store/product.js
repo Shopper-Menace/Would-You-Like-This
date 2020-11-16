@@ -23,7 +23,6 @@ export const fetchSingleProduct = productId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/products/${productId}`)
-      console.log('product data in thunk for single product view', data)
       dispatch(setSingleProduct(data))
     } catch (err) {
       console.error(err)

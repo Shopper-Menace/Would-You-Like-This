@@ -18,7 +18,6 @@ class SingleProduct extends React.Component {
     try {
       const productId = this.props.match.params.productId
       this.props.loadSingleProduct(productId)
-      console.log('props', this.props)
     } catch (error) {
       console.error(error)
     }
@@ -37,8 +36,7 @@ class SingleProduct extends React.Component {
     const user = this.props.user
     const isAdmin = this.props.user.isAdmin
     const destroyProduct = this.props.destroyProduct
-    console.log('state in singleProduct view: ', this.state)
-    console.log('props in singleProduct view render func', this.props)
+    const addToCart = this.props.addToCart
 
     return (
       <div className="singleProduct">
@@ -116,7 +114,7 @@ class SingleProduct extends React.Component {
                     user.orders.filter(
                       order => order.fulfillmentStatus === 'Cart'
                     )[0].id,
-                    id
+                    product.id
                   )
                 }
               >
