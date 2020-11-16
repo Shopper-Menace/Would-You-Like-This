@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+import {addToCart, addToLocal} from '../store'
 import {connect} from 'react-redux'
 import {
   addToCart,
@@ -75,17 +77,15 @@ class SingleProduct extends React.Component {
                 Edit Product
               </button>
             )}
-
-            <button
-              className="delete"
-              type="button"
-              onClick={() => destroyProduct(product.id)}
-            >
-              Delete
-            </button>
-            <button className="setAsFeatured" type="button">
-              Set as Featured
-            </button>
+            <Link to="/products">
+              <button
+                className="delete"
+                type="button"
+                onClick={() => destroyProduct(product.id)}
+              >
+                Delete
+              </button>
+            </Link>
           </div>
         )}
 
@@ -94,6 +94,9 @@ class SingleProduct extends React.Component {
           <h3>
             {product.name} Price: ${product.price / 100}
           </h3>
+          {product.featured && (
+            <h4 className="isFeatured">*Featured Product*</h4>
+          )}
           <img src={product.imageUrl} />
           <div>{product.description}</div>
           {!user.id ? (
