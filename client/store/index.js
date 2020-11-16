@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import users from './users'
+import userprofile from './userprofile'
 import cart from './cart'
 import products from './products'
 import product from './product'
@@ -12,6 +13,7 @@ import featured from './featured'
 
 const reducer = combineReducers({
   user,
+  userprofile,
   users,
   cart,
   products,
@@ -33,3 +35,4 @@ export * from './product'
 export * from './users'
 export * from './recentlyadded'
 export * from './featured'
+export * from './userprofile'

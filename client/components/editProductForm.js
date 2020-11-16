@@ -114,8 +114,8 @@ class EditProductForm extends React.Component {
             name="featured"
             type="text"
           >
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
           <label htmlFor="featured">Recently Added?:</label>
           <select
@@ -124,8 +124,8 @@ class EditProductForm extends React.Component {
             name="recentlyAdded"
             type="text"
           >
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
           <button className="submit" type="submit" value="submit">
             Submit

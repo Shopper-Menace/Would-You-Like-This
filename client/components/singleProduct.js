@@ -41,10 +41,11 @@ class SingleProduct extends React.Component {
       product,
       addItemToCart,
       user,
-      isAdmin,
       destroyProduct,
       addToLocal
     } = this.props
+
+    const isAdmin = user.isAdmin
 
     return (
       <div className="singleProduct">
