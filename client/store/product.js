@@ -19,12 +19,15 @@ const setSingleProduct = product => ({
 //THUNKS
 
 //SINGLE PRODUCT
-export const fetchSingleProduct = id => async dispatch => {
-  try {
-    const {data: product} = await axios.get(`/api/products/${id}`)
-    dispatch(setSingleProduct(product))
-  } catch (err) {
-    console.error(err)
+export const fetchSingleProduct = productId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/products/${productId}`)
+      console.log('product data in thunk for single product view', data)
+      dispatch(setSingleProduct(data))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
@@ -45,7 +48,7 @@ export const updateProduct = (productId, newInfo) => {
 
 const initialState = {}
 
-export default function(state = initialState, action) {
+export default function product(state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_PRODUCT:
       return action.product
