@@ -75,18 +75,17 @@ class Products extends React.Component {
 
                   {isAdmin && (
                     <div className="adminButtons">
-                      <button className="edit" type="button">
-                        Edit
-                      </button>
+                      <Link to={`/products/${product.id}`}>
+                        <button className="edit" type="button">
+                          Edit
+                        </button>
+                      </Link>
                       <button
                         className="delete"
                         type="button"
                         onClick={() => destroyProduct(product.id)}
                       >
                         Delete
-                      </button>
-                      <button className="setAsFeatured" type="button">
-                        Set as Featured
                       </button>
                     </div>
                   )}
@@ -95,6 +94,9 @@ class Products extends React.Component {
                     <Link to={`/products/${product.id}`}>
                       <h5 className="productname">{product.name}</h5>
                     </Link>
+                    {product.featured && (
+                      <h6 className="isFeatured">*Featured Product*</h6>
+                    )}
                     <div>{`$${product.price / 100}`}</div>
 
                     {!this.props.user.id ? (
