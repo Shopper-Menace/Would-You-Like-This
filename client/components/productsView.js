@@ -14,9 +14,11 @@ class Products extends React.Component {
   constructor() {
     super()
     this.state = {
-      showForm: false
+      showForm: false,
+      filter: 'All'
     }
     this.toggleShow = this.toggleShow.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -30,8 +32,23 @@ class Products extends React.Component {
       : this.setState({showForm: true})
   }
 
+  handleChange(event) {
+    this.setState({filter: event.target.value})
+  }
+
   render() {
     //variable to check if current user is an Admin
+    console.log('products view', products)
+
+    const {filter} = this.state
+    const products = this.props.products.filter(product => {
+      if (filter === 'All') return product
+      if (filter === 'Luggage') return product.category === 'Luggage'
+      if (filter === 'Championship Merch')
+        return product.category === 'Championship Merch'
+      if (filter === 'Lost and Found')
+        return product.category === 'Lost and Found'
+    })
 
     const {user, destroyProduct, addToLocal, addItemToCart} = this.props
     const {isAdmin} = user
@@ -40,6 +57,19 @@ class Products extends React.Component {
       <div className="viewallcontainer">
         <div className="viewallsidebar">
           <h1>WYLT Prime</h1>
+          <div id="product-filter">
+            <label htmlFor="productFilter">Choose Category:</label>
+            <select
+              onChange={this.handleChange}
+              value={filter}
+              name="productFilter"
+            >
+              <option>All</option>
+              <option>Luggage</option>
+              <option>Championship Merch</option>
+              <option>Lost and Found</option>
+            </select>
+          </div>
         </div>
         {isAdmin && (
           <div>
@@ -69,8 +99,8 @@ class Products extends React.Component {
           </div>
         )}
         <div className="productview">
-          {this.props.products.length > 0 ? (
-            this.props.products.map(product => {
+          {products.length > 0 ? (
+            products.map(product => {
               return (
                 <div key={product.id} className="prod">
                   <div className="prodbox">
