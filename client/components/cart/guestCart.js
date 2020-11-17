@@ -11,19 +11,25 @@ const GuestCart = ({handleRemove}) => {
   ) : (
     <div>
       GUEST CART
-      {cart.map(item => (
-        <div key={item[0]}>
-          <h5>Category: {item[1]}</h5>
-          <h3>
-            {item[2]} Price: ${item[3] / 100}
-          </h3>
-          <img src={item[5]} />
-          <div>{item[4]}</div>
-          <button onClick={() => handleRemove(item)}> Remove from cart</button>
-        </div>
-      ))}
+      {cart.map(item => {
+        cartTotal += item[3]
+        return (
+          <div key={item[0]}>
+            <h5>Category: {item[1]}</h5>
+            <h3>
+              {item[2]} Price: ${item[3] / 100}
+            </h3>
+            <img src={item[5]} />
+            <div>{item[4]}</div>
+            <button onClick={() => handleRemove(item)}>
+              {' '}
+              Remove from cart
+            </button>
+          </div>
+        )
+      })}
       <h5>Your total is: ${cartTotal / 100}</h5>
-      <Link to="/cart/checkout">
+      <Link to={{pathname: '/cart/checkout', state: {cartTotal}}}>
         <button>Go to Checkout</button>
       </Link>
     </div>

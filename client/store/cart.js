@@ -97,6 +97,8 @@ export default function(state = initialState, action) {
       localStorage.setItem('cart', JSON.stringify(tempCartForRemove))
       return {...state}
     default:
+      if (!JSON.parse(localStorage.getItem('cart')))
+        localStorage.setItem('cart', JSON.stringify([]))
       return state
   }
 }
