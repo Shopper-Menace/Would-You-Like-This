@@ -7,7 +7,7 @@ class ViewUsers extends React.Component {
   constructor() {
     super()
     this.state = {
-      showUsers: false
+      showUsers: true
     }
     this.toggleShow = this.toggleShow.bind(this)
   }
@@ -24,6 +24,7 @@ class ViewUsers extends React.Component {
 
   render() {
     const users = this.props.users
+    console.log('viewusers props', this.props)
 
     return (
       <div id="all-users">

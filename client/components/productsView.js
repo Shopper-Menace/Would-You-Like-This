@@ -63,6 +63,9 @@ class Products extends React.Component {
                 Add Product
               </button>
             )}
+            <Link to="/users-admin">
+              <button type="button">View Users</button>
+            </Link>
           </div>
         )}
         <div className="productview">

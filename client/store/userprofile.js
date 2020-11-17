@@ -19,7 +19,6 @@ export const fetchSingleUser = id => {
   return async dispatch => {
     try {
       const {data: singleUser} = await axios.get(`/api/users-admin/${id}`)
-      console.log('user data in thunk', singleUser)
       dispatch(setSingleUser(singleUser))
     } catch (err) {
       console.log(err)
