@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import singleProduct from './components/singleProduct'
-import viewSingleUser from './components/viewSingleUser'
-import viewUsers from './components/viewUsers'
 
 import {
   Login,
@@ -14,6 +12,8 @@ import {
   Products,
   Cart,
   Checkout,
+  ViewSingleUser,
+  ViewUsers,
   Confirmation
 } from './components'
 
@@ -41,8 +41,8 @@ class Routes extends Component {
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/:productId" component={singleProduct} />
-        <Route exact path="/users-admin/" component={viewUsers} />
-        <Route exact path="/users-admin/:userId" component={viewSingleUser} />
+        <Route exact path="/users-admin/" component={ViewUsers} />
+        <Route exact path="/users-admin/:userId" component={ViewSingleUser} />
         <Route path="/home" component={Home} />
 
         {/* {isLoggedIn && (

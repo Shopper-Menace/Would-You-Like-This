@@ -1,25 +1,25 @@
 import axios from 'axios'
 
-const UPDATE_A_USER = 'UPDATE_USER'
 const SET_SINGLE_USER = 'SET_SINGLE_USER'
+const UPDATE_A_USER = 'UPDATE_USER'
+
+export const setSingleUser = singleUser => {
+  return {
+    type: SET_SINGLE_USER,
+    singleUser
+  }
+}
 
 export const updateAUser = updatedUser => ({
   type: UPDATE_A_USER,
   updatedUser
 })
 
-export const setSingleUser = currentUser => {
-  return {
-    type: SET_SINGLE_USER,
-    currentUser
-  }
-}
-
-export const fetchSingleUser = userId => {
+export const fetchSingleUser = id => {
   return async dispatch => {
     try {
-      const {data: user} = await axios.get(`/api/users-admin/${userId}`)
-      dispatch(setSingleUser(user))
+      const {data: singleUser} = await axios.get(`/api/users-admin/${id}`)
+      dispatch(setSingleUser(singleUser))
     } catch (err) {
       console.log(err)
     }
@@ -45,7 +45,7 @@ const initialState = {}
 export default function userprofile(state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_USER:
-      return action.currentUser
+      return action.singleUser
     case UPDATE_A_USER:
       return action.updatedUser
     default:
