@@ -18,8 +18,8 @@ export const updateAUser = updatedUser => ({
 export const fetchSingleUser = id => {
   return async dispatch => {
     try {
-      const {data: user} = await axios.get(`/api/users-admin/${id}`)
-      dispatch(setSingleUser(user))
+      const {data: singleUser} = await axios.get(`/api/users-admin/${id}`)
+      dispatch(setSingleUser(singleUser))
     } catch (err) {
       console.log(err)
     }

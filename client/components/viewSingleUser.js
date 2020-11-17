@@ -15,7 +15,7 @@ class ViewSingleUser extends React.Component {
 
   componentDidMount() {
     try {
-      const userId = this.props.match.params.id
+      const {userId} = this.props.match.params
       this.props.loadSingleUser(userId)
     } catch (error) {
       console.error(error)
@@ -29,8 +29,7 @@ class ViewSingleUser extends React.Component {
   }
 
   render() {
-    const user = this.props.user
-
+    const user = this.props.singleUser
     return (
       <div id="single-user">
         <div id="user-info">
@@ -81,7 +80,7 @@ class ViewSingleUser extends React.Component {
 }
 
 const mapState = state => ({
-  user: state.singleUser
+  singleUser: state.userprofile
 })
 
 const mapDispatch = dispatch => ({
