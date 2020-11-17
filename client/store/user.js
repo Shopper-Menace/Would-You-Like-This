@@ -56,6 +56,20 @@ export const logout = () => async dispatch => {
   }
 }
 
+//checkout
+const CHECKOUT = 'CHECKOUT'
+const doCheckout = () => ({type: CHECKOUT})
+export const handleCheckout = order => async dispatch => {
+  try {
+    const res = await axios.put('/api/users/cart/checkout', order)
+    dispatch(doCheckout())
+    history.push('/cart/confirmation')
+    window.location.reload()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -65,6 +79,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case CHECKOUT:
+      return {...state}
     default:
       return state
   }

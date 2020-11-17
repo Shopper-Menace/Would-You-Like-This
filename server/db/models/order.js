@@ -12,6 +12,27 @@ const Order = db.define('order', {
   fulfillmentStatus: {
     type: Sequelize.ENUM('Cart', 'Pending', 'Complete'),
     defaultValue: 'Cart'
+  },
+  name: {
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  },
+  state: {
+    type: Sequelize.STRING
+  },
+  zip: {
+    type: Sequelize.INTEGER
+  },
+  tel: {
+    type: Sequelize.STRING
+  },
+  totalCost: {
+    type: Sequelize.INTEGER
   }
 })
 

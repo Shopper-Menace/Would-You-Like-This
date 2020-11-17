@@ -47,30 +47,30 @@ async function seed() {
   // Creates 50 dummy items
   // const products = await Promise.all([generateProducts()])
   // Creates specific dummy item
-  // const newProduct = await Product.create({
-  //   name: faker.commerce.productName(),
-  //   category: faker.commerce.department(),
-  //   price: faker.random.number(),
-  //   description: faker.commerce.productDescription(),
-  //   imageUrl: faker.image.abstract()
-  // })
+  const newProduct = await Product.create({
+    name: faker.commerce.productName(),
+    category: faker.commerce.department(),
+    price: faker.random.number(),
+    description: faker.commerce.productDescription(),
+    imageUrl: faker.image.abstract()
+  })
   // create test order in DB
-  // let testOrder = await dummyUser.createOrder(Order)
+  let testOrder = await dummyUser.createOrder(Order)
 
-  // Associate Dummy Product with Dummy order as an Order Item
-  // await OrderItem.create({
-  //   orderId: testOrder.id,
-  //   productId: newProduct.id,
-  //   currentPrice: newProduct.price,
-  //   quantity: 1
-  // })
+  //Associate Dummy Product with Dummy order as an Order Item
+  await OrderItem.create({
+    orderId: testOrder.id,
+    productId: newProduct.id,
+    currentPrice: newProduct.price,
+    quantity: 1
+  })
 
-  // await testOrder.addProduct(newProduct, {
-  //   through: {
-  //     currentPrice: newProduct.price,
-  //     quantity: 1
-  //   }
-  // })
+  await testOrder.addProduct(newProduct, {
+    through: {
+      currentPrice: newProduct.price,
+      quantity: 1
+    }
+  })
 
   //Real Data: Luggage
 

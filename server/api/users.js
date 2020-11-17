@@ -50,6 +50,43 @@ router.put('/removeItem/:id', async (req, res, next) => {
   }
 })
 
+//UPDATE USER ORDERS/CART FOR CHECKOUT
+router.put('/cart/checkout', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        fulfillmentStatus: 'Cart'
+      }
+    })
+
+    const name = `${req.body.firstName} ${req.body.lastName}`
+    const address = `${req.body.address} ${req.body.aptNumber}`
+    const {city, state, zip, tel, totalCost} = req.body
+
+    await order.update({
+      fulfillmentStatus: 'Pending',
+      name: name,
+      address: address,
+      city: city,
+      state: state,
+      zip: zip,
+      tel: tel,
+      totalCost: totalCost
+    })
+
+    const user = await User.findByPk(req.user.id)
+    await user.createOrder(Order)
+
+    console.log(user, 'USER')
+    //make new order
+
+    res.sendStatus(200)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // router.put('/:id', async (req, res, next) => {
 //   try {
 //     const item = await OrderItem.findByPk(req.params.id)
