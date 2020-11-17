@@ -30,6 +30,7 @@ class ViewSingleUser extends React.Component {
 
   render() {
     const user = this.props.singleUser
+
     return (
       <div id="single-user">
         <div id="user-info">
