@@ -70,34 +70,35 @@ class Products extends React.Component {
               <option>Lost and Found</option>
             </select>
           </div>
-        </div>
-        {isAdmin && (
-          <div>
-            {this.state.showForm ? (
-              <div>
+          {isAdmin && (
+            <div>
+              {this.state.showForm ? (
+                <div>
+                  <button
+                    onClick={() => this.toggleShow()}
+                    className="hide"
+                    type="button"
+                  >
+                    Hide Form
+                  </button>
+                  <NewProductForm />
+                </div>
+              ) : (
                 <button
                   onClick={() => this.toggleShow()}
-                  className="hide"
+                  className="add"
                   type="button"
                 >
-                  Hide Form
+                  Add Product
                 </button>
-                <NewProductForm />
-              </div>
-            ) : (
-              <button
-                onClick={() => this.toggleShow()}
-                className="add"
-                type="button"
-              >
-                Add Product
-              </button>
-            )}
-            <Link to="/users-admin">
-              <button type="button">View Users</button>
-            </Link>
-          </div>
-        )}
+              )}
+              <Link to="/users-admin">
+                <button type="button">View Users</button>
+              </Link>
+            </div>
+          )}
+        </div>
+
         <div className="productview">
           {products.length > 0 ? (
             products.map(product => {
