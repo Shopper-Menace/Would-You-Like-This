@@ -223,3 +223,20 @@ form div {
 .logo {
   height: 10vh;
 }
+
+/* Google Button */
+
+.googleButton {
+  background: #4285f4;
+  color: white;
+  border: none;
+  width: 10rem;
+  height: 4rem;
+  border-radius: 3%;
+}
+
+.googleImage {
+  width: 1rem;
+  background: white;
+  border-radius: 50%;
+}

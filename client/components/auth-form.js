@@ -29,7 +29,16 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+
+      <a href="/auth/google">
+        <button className="googleButton" type="button">
+          <img
+            className="googleImage"
+            src="https://www.iconfinder.com/data/icons/social-media-2210/24/Google-512.png"
+          />
+          {displayName} with Google
+        </button>
+      </a>
     </div>
   )
 }
