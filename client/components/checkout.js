@@ -49,6 +49,10 @@ class Checkout extends Component {
       zip: '',
       tel: ''
     }
+    window.localStorage.clear()
+    if (!window.localStorage.cart) {
+      window.localStorage.setItem('cart', JSON.stringify([]))
+    }
   }
 
   render() {

@@ -53,6 +53,9 @@ router.put('/removeItem/:id', async (req, res, next) => {
 //UPDATE USER ORDERS/CART FOR CHECKOUT
 router.put('/cart/checkout', async (req, res, next) => {
   try {
+    if (!req.user) {
+      req.user = {id: 51}
+    }
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
