@@ -13,8 +13,11 @@ class RecentlyAdded extends React.Component {
 
   render() {
     return (
-      <div className="productview">
-        <h1>Recently Added</h1>
+      <div className="homeview">
+        <div className="centerheader">
+          <h1>Recently Added</h1>
+        </div>
+
         <div className="homeprod">
           {this.props.recentlyadded.length > 0 ? (
             this.props.recentlyadded.map(product => {

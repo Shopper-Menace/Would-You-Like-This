@@ -13,67 +13,71 @@ class Featured extends React.Component {
 
   render() {
     return (
-      <div className="productview">
-        <h1>Featured</h1>
-        {this.props.featured.length > 0 ? (
-          this.props.featured.map(product => {
-            return (
-              <div key={product.id} className="prod">
-                <div className="prodbox">
-                  <Link to={`/products/${product.id}`}>
-                    <img className="prodimg" src={product.imageUrl} />
-                  </Link>
+      <div className="homeview">
+        <div className="centerheader">
+          <h1>Featured</h1>
+        </div>
+        <div className="homeprod">
+          {this.props.featured.length > 0 ? (
+            this.props.featured.map(product => {
+              return (
+                <div key={product.id} className="homecell">
+                  <div>
+                    <Link to={`/products/${product.id}`}>
+                      <img className="prodimg" src={product.imageUrl} />
+                    </Link>
+                  </div>
+
+                  <div className="prodtext">
+                    <Link to={`/products/${product.id}`}>
+                      <h5 className="productname">{product.name}</h5>
+                    </Link>
+
+                    <div>{`$${product.price / 100}`}</div>
+
+                    {!this.props.user.id ? (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            this.props.addToLocal([
+                              product.id,
+                              product.category,
+                              product.name,
+                              product.price,
+                              product.description,
+                              product.imageUrl
+                            ])
+                          }
+                        >
+                          Add to Carts
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            await addItemToCart(
+                              this.props.user.orders.filter(
+                                order => order.fulfillmentStatus === 'Cart'
+                              )[0].id,
+                              product.id
+                            )
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-
-                <div className="prodtext">
-                  <Link to={`/products/${product.id}`}>
-                    <h5 className="productname">{product.name}</h5>
-                  </Link>
-
-                  <div>{`$${product.price / 100}`}</div>
-
-                  {!this.props.user.id ? (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          this.props.addToLocal([
-                            product.id,
-                            product.category,
-                            product.name,
-                            product.price,
-                            product.description,
-                            product.imageUrl
-                          ])
-                        }
-                      >
-                        Add to Carts
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          await addItemToCart(
-                            this.props.user.orders.filter(
-                              order => order.fulfillmentStatus === 'Cart'
-                            )[0].id,
-                            product.id
-                          )
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )
-          })
-        ) : (
-          <div />
-        )}
+              )
+            })
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     )
   }
