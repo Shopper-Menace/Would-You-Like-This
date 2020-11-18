@@ -44,6 +44,7 @@ form div {
 .prodimg {
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 
 .prodtext {
@@ -69,7 +70,15 @@ form div {
   width: calc(0.75 * (100vw - 44px));
   min-width: 247px;
 }
-
+.homeview {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.centerheader {
+  width: 100%;
+  text-align: center;
+}
 .prod {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -153,16 +162,34 @@ form div {
   outline: 2px solid black;
 }
 
+.hometext {
+  outline: 2px solid black;
+}
+
 .homeprod {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-content: center;
   align-content: center;
+  text-align: center;
 }
-
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
 .homecell {
-  margin: 10px;
+  display: block;
+  position: relative;
+  margin: 5%;
   outline: 5px solid black;
+}
+.homename {
+  justify-content: center;
+}
+.home {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 /* .navFont {
