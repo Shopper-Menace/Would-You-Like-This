@@ -106,6 +106,33 @@ form div {
   width: 100%;
 }
 
+button {
+  background-color: #212529;
+  border-radius: 40%;
+  color: #fff;
+  border: none;
+  text-shadow: none;
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0 0.25em 1rem 0;
+  padding: 0.8em 1.5em 0.8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+  opacity: 0.7;
+}
+
+button > img {
+  width: 2em;
+  height: 2em;
+}
+
+img {
+  max-height: 400px;
+  max-width: 400px;
+}
+
 #shipping-header {
   padding: 0;
   width: 100%;
@@ -120,6 +147,10 @@ form div {
   width: 100%;
   display: flex;
   margin-top: 0em;
+}
+
+#google-button-div {
+  margin: 0 auto;
 }
 
 .shipping-label {
@@ -341,15 +372,17 @@ form div {
   margin-bottom: 2rem;
   text-align: center;
 }
+
 /* Google Button */
 
 .googleButton {
   background: #4285f4;
   color: white;
   border: none;
-  width: 10rem;
-  height: 4rem;
+  width: 3rem;
+  height: 2rem;
   border-radius: 3%;
+  display: inline-block;
 }
 
 .googleImage {
