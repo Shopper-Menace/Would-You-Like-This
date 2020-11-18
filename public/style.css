@@ -288,6 +288,32 @@ form div {
   height: 10vh;
 }
 
+.cart {
+  margin-top: 1rem;
+}
+
+.item {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  margin-bottom: 2rem;
+  border-bottom: #201e1f solid 2px;
+  text-align: center;
+}
+
+.removefromcart {
+  margin-bottom: 1rem;
+}
+
+.checkoutbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 2rem;
+  text-align: center;
+=======
 /* Google Button */
 
 .googleButton {
