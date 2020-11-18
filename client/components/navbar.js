@@ -9,7 +9,9 @@ const NavbarComp = ({handleClick, isLoggedIn}) => {
   return (
     <div className="navbar">
       <img src="/favicon.ico" className="logo" />
-      <Link to="/home">Home</Link>
+      <button>
+        <Link to="/home">Home</Link>
+      </button>
       <div>
         <nav>
           {isLoggedIn ? (
