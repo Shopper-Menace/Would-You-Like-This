@@ -6,6 +6,7 @@ body {
 
 a {
   text-decoration: none;
+  color: #212529;
 }
 
 label {
@@ -80,6 +81,69 @@ form div {
   width: 100%;
   height: 100%;
 }
+
+.submit-button {
+  background-color: #50b2c0;
+  color: #212529;
+  text-shadow: none;
+  font-size: 1rem;
+  margin: 0 0.25em 1rem 0;
+  padding: 0.8em 1.5em 0.8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 0.3rem;
+  display: block;
+  width: 100%;
+}
+
+#shipping-header {
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.shipping-form {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  margin-top: 0em;
+}
+
+.shipping-label {
+  display: block;
+  margin: 0 0 0.25em 0;
+  color: #212529;
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.shipping-container {
+  width: 66%;
+  margin: 0 auto;
+}
+
+.checkout-div {
+  width: 100%;
+}
+
+.checkout-input {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  line-height: 1.2em;
+  padding: 0.7em 1em;
+  font-size: 1em;
+  background-color: #fff;
+  color: #212529;
+  border-radius: 0.3rem;
+}
+
 .prodname {
   display: flex;
   justify-content: center;
@@ -249,4 +313,20 @@ form div {
   width: 50%;
   margin-bottom: 2rem;
   text-align: center;
+=======
+/* Google Button */
+
+.googleButton {
+  background: #4285f4;
+  color: white;
+  border: none;
+  width: 10rem;
+  height: 4rem;
+  border-radius: 3%;
+}
+
+.googleImage {
+  width: 1rem;
+  background: white;
+  border-radius: 50%;
 }
