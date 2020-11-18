@@ -5,10 +5,11 @@ const isAdminUser = require('./middleware/isAdminUser')
 
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
-router.use('/users-admin', require('./users-admin'))
 
 router.use(isLoggedIn)
 router.use(isAdminUser)
+
+router.use('/users-admin', require('./users-admin'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
