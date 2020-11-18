@@ -58,14 +58,20 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <div>
-          <h3>You're about to be the proud owner of this cool stuff!</h3>
-          <p>We just need some shipping info so we can send it to you</p>
+        <div className="shipping-container">
+          <div id="shipping-header">
+            <h3>You're about to be the proud owner of this cool stuff!</h3>
+            <p>We just need some shipping info so we can send it to you</p>
+            <p>Your total is: ${this.props.location.state.cartTotal / 100}</p>
+          </div>
           <div>
             <form id="shipping-form" onSubmit={this.handleSubmit}>
-              <div>
-                <label htmlFor="first-name">First Name</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="first-name">
+                  First Name
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="firstName"
@@ -74,9 +80,12 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="last-name">Last Name</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="last-name">
+                  Last Name
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="lastName"
@@ -85,10 +94,12 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              s
-              <div>
-                <label htmlFor="address">Address</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="address">
+                  Address
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="address"
@@ -97,18 +108,24 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="aptNumber">Apt or Suite No.</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="aptNumber">
+                  Apt or Suite No.
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="aptNumber"
                   value={this.state.aptNumber}
                 />
               </div>
-              <div>
-                <label htmlFor="city">City</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="city">
+                  City
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="city"
@@ -117,9 +134,12 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="state">State</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="state">
+                  State
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="text"
                   name="state"
@@ -129,9 +149,12 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="zip">Zip</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="zip">
+                  Zip
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="number"
                   name="zip"
@@ -143,9 +166,12 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="tel">Phone Number</label>
+              <div className="checkout-div">
+                <label className="shipping-label" htmlFor="tel">
+                  Phone Number
+                </label>
                 <input
+                  className="checkout-input"
                   onChange={this.handleChange}
                   type="tel"
                   value={this.state.tel}
@@ -155,13 +181,14 @@ class Checkout extends Component {
                   required
                 />
               </div>
-              <button className="submit" type="submit" value="submit">
-                Place my Order
-              </button>
+              <div className="checkout-div">
+                <button className="submit-button" type="submit" value="submit">
+                  Place my Order
+                </button>
+              </div>
             </form>
           </div>
         </div>
-        <h3>Total: ${this.props.location.state.cartTotal / 100}</h3>
       </div>
     )
   }
