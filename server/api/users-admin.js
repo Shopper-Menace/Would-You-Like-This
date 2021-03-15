@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const isAdminUser = require('./middleware/isAdminUser')
+const isAdminUser = require('./middleware/is-admin-user')
 const {User, Product, Order, OrderItem} = require('../db/models')
 
 module.exports = router
